@@ -43,7 +43,7 @@ export class CurrentLocation extends React.Component{
     }
     loadMap(){
         if (this.props && this.props.google){
-            //This will chaeck to see if google is available
+            //This will check to see if google is available
             const {google} = this.props
             const maps = google.maps;
             const mapRef = this.refs.map;
