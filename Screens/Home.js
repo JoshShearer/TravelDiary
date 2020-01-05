@@ -1,11 +1,16 @@
 import React, { Component } from 'react';
 import MapContainer from "../Components/GPSCollection";
-
+import styled from "styled-components";
 
 export default class Home extends Component{
     render (){
         return (
-            <h1>This is the homescreen bitches.  Eventually you will see buttons and a map</h1>
+            
+            <React.Fragment>
+                <div>
+                    <MapContainer/>
+                </div>
+            </React.Fragment>            
         );
     }
 };

@@ -41,6 +41,21 @@ export class CurrentLocation extends React.Component{
             map.panTo(center);
         }
     }
+    componentDidMount(){
+        if (this.props.centerAroundCurrentLocation){
+            if (navigator && navigator.geolocation){
+                navigator.geolocation.getCurrentPosition(pos => {
+                    const coords = pos.coords;
+                    this.setState({
+                        currentLocation: {
+                            lat: coords.latitude,
+                            lng: coords.longitude
+                        }
+                    });
+            });
+        }}
+        this.loadMap();
+    }
     loadMap(){
         if (this.props && this.props.google){
             //This will check to see if google is available
@@ -53,7 +68,7 @@ export class CurrentLocation extends React.Component{
 
             let{zoom} = this.props;
             const{lat, lng} = this.state.currentLocation;
-            const center = new maps.Lating(lat,lng);
+            const center = new maps.LatLng(lat,lng);
             const mapConfig = Object.assign(
                 {},
                 {
@@ -64,20 +79,6 @@ export class CurrentLocation extends React.Component{
             //maps.Map() is constructor that instantiates the map
             this.map = new maps.Map(node, mapConfig);
         }
-    }
-    componentDidMount(){
-        if (this.props.centerAroundCurrentLocation){
-            if (navigator.geolocation.getCurrentPosition(pos => {
-                const coords = pos.coords;
-                this.setState({
-                    currentLocation: {
-                        lat: coords.latitude,
-                        lng: coords.longitude
-                    }
-                });
-            }));
-        }
-        this.loadMap();
     }
     renderChildren(){
         const { children } = this.props;

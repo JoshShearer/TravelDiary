@@ -1,41 +1,35 @@
-import React, { useState } from 'react';
-//import View from 'react-view-component';
+import React, { Component } from 'react';
 import './App.css';
-import {Switch, Route} from 'react-router-dom';
+import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
+import "bootstrap/dist/css/bootstrap.min.css";
+import styled from "styled-components";
 import Splash from "./Screens/Splash";
 import Settings from "./Screens/Settings";
 import NewEntry from "./Screens/NewEntry";
+import MapRoute from "./Screens/MapRoute";
 import Home from "./Screens/Home";
 import Entries from "./Screens/Entries";
+import Header from "./Components/Header";
+import Footer from "./Components/Footer";
 
 
-
-class App extends React.Component {
+class App extends Component {
   render(){
   return (
-      <React.Fragment>
-        <Switch>
-          <Route path="/" component={Splash}/>
-          <Route path="/" component={Settings}/>
-          <Route path="/" component={NewEntry}/>        
-          <Route path="/" component={Home}/>
-          <Route path="/" component={Entries}/>
-        </Switch>
-      </React.Fragment>
-    /* <div className="App">
-			<h1>Josh Shearer</h1>
-			<p>
-				This is my very first application using react.  The purpose is to develope a travel diary application to log 
-				GPS tracks during a trip as well as capture some photos and thoughts associated with those locations as 
-				a personal Journal/blog.
-			</p>
-      <ul>
-        <li>New Zealand</li>
-        <li>Africa</li>
-        <li>SouthEast Asia</li>
-        <li>And...don't forget Europe</li>
-      </ul>
-    </div> */
+      <Router>
+        <div className="App">
+          <Header/>
+          <Switch>
+            <Route path="/" exact component={Home}/> 
+            <Route path="/route" component={MapRoute}/>
+            <Route path="/splash" component={Splash}/>
+            <Route path="/settings" component={Settings}/>
+            <Route path="/newEntry" component={NewEntry}/>        
+            <Route path="/entries" component={Entries}/>
+          </Switch>
+          <Footer/>
+        </div>
+      </Router>
     );
   }
 }

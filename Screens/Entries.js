@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
-
+import DataContainer from "../Components/EntryContainer";
 
 export default class Entries extends Component{
     render (){
         return (
-            <h1>This will be the temp screen for bootup and wait...transparent</h1>
+            <div>
+                <DataContainer/>
+            </div>
         );
     }
 }

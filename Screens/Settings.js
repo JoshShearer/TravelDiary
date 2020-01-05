@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import styled from "styled-components";
 
 /*Current settings ideas
 1. GPS logging frequency 1, 5,15, 30, 2H
