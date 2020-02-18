@@ -1,11 +1,12 @@
 import React, { Component, useState, useEffect } from 'react';
 import  { createStore } from 'react-redux';
 import axios from 'axios';
+import NewEntry from '../Screens/NewEntry';
+import Entries from '../Screens/Entries';
 
 
 export default function DataHandling (props) {
     
-  
     const [dataState, setDataState] = useState([]);
     const [title, setTitle] = useState("");
     const [info, setInfo] = useState("");
@@ -97,5 +98,38 @@ export default function DataHandling (props) {
         update: { title: updateToApply }
       });
     };
-    return dataState
+
+    const nLocation = () => {
+      if (navigator.geolocation){
+          navigator.geolocation.getCurrentPosition(getCoordinates);
+      }else{
+          alert("Geolocation is not supported!");
+      }
+    }
+    const getCoordinates = (position) => {
+        setGPS({lat: position.coords.latitude,
+          long: position.coords.longitude}
+        })    
+  
+    nLocation();
+    var findDate = new Date();
+    var date = (findDate.getMonth()+1) + "-" + findDate.getDate() + "-" + findDate.getFullYear();
+    var time = findDate.getHours() + ":" + findDate.getMinutes() + ":" + findDate.getSeconds();
+    
+    
+    const titleHandler = event => {
+        setTitle(event.target.value)
+    }
+
+    const infoHandler = event => {
+        setInfo(event.target.value)
+    }
+      return (
+        <div>
+          {props.page = "newEntry"
+            ? return <NewEntry ourTitleFunction={this.titleHandler} ourInfoHandler={this.infoHandler}/>
+            : return <Entries />
+          }
+        </div>
+      )
 }

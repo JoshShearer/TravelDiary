@@ -23,15 +23,22 @@ export default class Footer extends React.Component{
                             </Link>                
                         </li>
                     </ul>
+                    <ul className="navbar-nav justify-content-middle">
+                        <li className="nav-item ml-5">
+                            <Link to='/Settings' className="nav-link">
+                                Setting
+                            </Link>                
+                        </li>
+                    </ul>
                 </NavWrapper>
             </div>
         )
     }
 }
 
-const NavWrapper = styled.nav 
-`background:var(--mainOrange);
+const NavWrapper = styled.nav `
+background:var(--mainOrange);
 .nav-link{
-color:var(--lightOrange);
+    color:var(--lightOrange);
 }
 `;

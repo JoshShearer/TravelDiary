@@ -31,3 +31,11 @@ body{
   text-align:center;
   font-size:12;
 }
+.filepond--item {
+  width: calc(25% - .25em);
+}
+.mapEntries{
+  mapStyles: {
+    
+  }
+}

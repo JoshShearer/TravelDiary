@@ -1,14 +1,22 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+
 import './index.css';
 import App from './App';
 import {BrowserRouter as Router} from 'react-router-dom';
 import * as serviceWorker from './serviceWorker';
+import { Helmet } from 'react-helmet';
+
+const TITLE = 'Travel Journal';
+
 
 
 ReactDOM.render(
 <Router>
-    <App />
+    <Helmet>
+        <title>{ TITLE }</title>
+        <App/>
+    </Helmet>
 </Router>
 , document.getElementById('root')
 );

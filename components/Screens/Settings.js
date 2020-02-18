@@ -8,16 +8,19 @@ import styled from "styled-components";
     Folder/Location Access
 4. 
 */
+const Comp = styled.div `
+  background: papayawhip;
+`;
 
 export default class Settings extends Component{
     render (){
         return (
-            <div>
+            <Comp>
                 <h1>GPS logging Frequency</h1>
                 <h1>Theme</h1>
                 <h1>Backup to Cloud</h1>
                 <h1>Others</h1>
-            </div>
+            </Comp>
         );
     }
 }
