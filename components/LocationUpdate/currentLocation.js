@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { Component } from 'react';
 import axios from 'axios';
 
 
-export default class CurrentLocation{
+export default class CurrentLocation extends Component{
     
 componentDidMount(){
     this.nLocation();
@@ -15,23 +15,25 @@ nLocation(){
           //  https://stackoverflow.com/questions/43871637/no-access-control-allow-origin-header-is-present-on-the-requested-resource-whe
     const proxyURL = "https://cors-anywhere.herokuapp.com/";
     const revGeocode = `https://nominatim.openstreetmap.org/reverse?lat=${position.coords.latitude}&lon=${position.coords.longitude}&format=json`;
+    console.log("prior to axios call")
+    var DataPass = {};
     axios
         .get(proxyURL+revGeocode)
         .then(res => {
             console.log(res)
             const locationData = (res.data.address);
-            locationData &&
-              const DataPass = {currentLocation:{   
+            this.props.DataPass({   
                                   gps: {lat: position.coords.latitude,
                                         lng: position.coords.longitude},
                                   neighborhood: locationData.suburb,
                                   city: locationData.city,
                                   state: locationData.state,
                                   country: locationData.country
-                                },
-                                loading: false
-                                }
-                      })   
+                                })
+                      }) 
+            // console.log("DataPass")  
+            // console.log(DataPass)
+            // this.props.DataPass(DataPass)
         .catch(err => console.log(err));
     }
   
@@ -40,11 +42,12 @@ nLocation(){
     }else{
     alert("Geolocation is not supported!");
     }
-  }, 1000);
+  }, 2000);
 }
 
 render(){
   return(
+    // <div>{console.log("quick test")}testing</div>
     <div></div>
   )
 }
