@@ -1,6 +1,7 @@
 import React, { Component, Fragment } from 'react';
 import './App.css';
 import TravelDiary from './containers/TravDiary/TravelDiary';
+import "bootstrap/dist/css/bootstrap.min.css";
 
 class App extends Component {
   
@@ -8,6 +9,7 @@ class App extends Component {
     
     return (
         <Fragment>
+         {console.log("Loading TravelDiary")}
           <TravelDiary/>
         </Fragment>
       );
