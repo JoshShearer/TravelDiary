@@ -4,6 +4,7 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import {BrowserRouter as Router} from 'react-router-dom';
+import "bootstrap/dist/css/bootstrap.min.css";
 import * as serviceWorker from './serviceWorker';
 import { Helmet } from 'react-helmet';
 
@@ -13,10 +14,12 @@ const TITLE = 'Travel Journal';
 
 ReactDOM.render(
 <Router>
-    <Helmet>
+{console.log("testing Loader")}
+    {/* <Helmet>
         <title>{ TITLE }</title>
         <App/>
-    </Helmet>
+    </Helmet> */}
+    <App/>
 </Router>
 , document.getElementById('root')
 );
