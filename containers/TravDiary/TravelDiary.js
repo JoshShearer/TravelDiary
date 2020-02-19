@@ -26,14 +26,14 @@ class TravelDiary extends Component {
 
     this.state = {
       currentLocation:{   
-        gps: {lat: '',
-              lng: ''},
+        gps: {lat: '39.005513',
+              lng: '-115.089849'},
         neighborhood: "",
         city: "",
         state: "",
         country: ""
       },
-      loading: false,
+      loading: true,
       entryData: [],
       newEntryData: {
         title: "",
@@ -80,8 +80,9 @@ class TravelDiary extends Component {
   getCurrentLocationHandler = (cLocation) => {
     this.setState({ loading: true }, () => {
       this.setState({currentLocation: cLocation})
+      this.setState({ loading: false})
     });
-    this.setState({ loading: false})
+    
   }
 
   addImages = () => {
@@ -108,6 +109,7 @@ class TravelDiary extends Component {
         
         <Router>
           <div className="TravelDiary">
+          {console.log('loaded TravelDiary')}
             {/* <LocationRequest/> */}
             <CurrentLocation DataPass={this.getCurrentLocationHandler}/>
             {/* <DataHandling EData={this.getAllEntriesFromDB}/> */}
@@ -115,6 +117,7 @@ class TravelDiary extends Component {
             {this.state.loading ? <LoadingSpinner /> : 
               <Switch>
                 {/* <PropsRoute exact path="/" component={Home} location={cLocation.gps}/> */}
+                {/* <Route exact path="/" component={Home}/> */}
                 <Route exact path="/" render={(routeProps) => <Home {...routeProps} {...this.state.currentLocation}/>}/>
                 {/* <Route 
                   path="/route" 
