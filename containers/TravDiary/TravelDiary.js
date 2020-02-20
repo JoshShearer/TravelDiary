@@ -4,8 +4,8 @@ import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
 import "bootstrap/dist/css/bootstrap.min.css";
 import Splash from "../../components/Screens/Splash";
 import Settings from "../../components/Screens/Settings";
-// import NewEntry from "../../components/Screens/NewEntry/NewEntry";
-// import MapRoute from "../../components/Screens/MapRoute";
+import NewEntry from "../../components/Screens/NewEntry/NewEntry";
+import MapRoute from "../../components/Screens/MapRoute";
 import Home from "../../components/Screens/Home";
 import Entries from "../../components/Screens/Entries";
 import Header from "../../components/Header/Header";
@@ -26,8 +26,8 @@ class TravelDiary extends Component {
 
     this.state = {
       currentLocation:{   
-        gps: {lat: '39.005513',
-              lng: '-115.089849'},
+        gps: {lat: '',
+              lng: ''},
         neighborhood: "",
         city: "",
         state: "",
@@ -42,38 +42,42 @@ class TravelDiary extends Component {
         imageType:[],
         date: "",
         time: "",
-        gps: {}        
+        gps: {},
+        location: {}        
       },
       intervalIsSet: false,
-      files: [
-        {
-         id: "",
-         name: "",
-         type: "",
-         size: 0,
-         metadata: {
-             resize: {
-                 mode: "",
-                 size: {
-                     width: 0,
-                     height: 0
-                 }
-             },
-             crop: {
-                 rect: {
-                     x: 0,
-                     y: 0,
-                     width: 0,
-                     height: 0
-                 },
-                 aspectRatio: 1
-             }
-         },
-         data: ""
-         }
-        ],
+      // files: [
+      //   {
+      //    id: "",
+      //    name: "",
+      //    type: "",
+      //    size: 0,
+      //    metadata: {
+      //        resize: {
+      //            mode: "",
+      //            size: {
+      //                width: 0,
+      //                height: 0
+      //            }
+      //        },
+      //        crop: {
+      //            rect: {
+      //                x: 0,
+      //                y: 0,
+      //                width: 0,
+      //                height: 0
+      //            },
+      //            aspectRatio: 1
+      //        }
+      //    },
+      //    data: ""
+      //    }
+      //   ],
         fileUploaded: false
     };
+  }
+  componentDidMount(){
+    this.setState({loading: false})
   }
   
 
@@ -81,15 +85,18 @@ class TravelDiary extends Component {
     this.setState({ loading: true }, () => {
       this.setState({currentLocation: cLocation})
       this.setState({ loading: false})
-    });
-    
+    }); 
   }
 
   addImages = () => {
 
   }
   addNewEntryHandler = (EData) => {
-    this.setState({newEntryData:EData})
+    this.setState({ fileUploaded: true, 
+                    newEntryData: EData}, () => {
+      
+      this.setState({ fileUploaded: false})
+    });
   }
   getAllEntriesFromDB = (allData) => {
     this.setState({entryData:allData})
@@ -99,37 +106,39 @@ class TravelDiary extends Component {
   }
 
   render(){
-    // const loading = this.state.loading;
-    // const cLocation = this.state.currentLocation;
-    // console.log(loading);
-    // console.dir(cLocation);
-        // this.getAllEntriesFromDB()
-        
+
         return (
         
         <Router>
           <div className="TravelDiary">
           {console.log('loaded TravelDiary')}
-            {/* <LocationRequest/> */}
             <CurrentLocation DataPass={this.getCurrentLocationHandler}/>
-            {/* <DataHandling EData={this.getAllEntriesFromDB}/> */}
+            
+            {!this.state.fileUploaded ? (
+              <DataHandling EData={this.getAllEntriesFromDB} op="Get"/>
+              ):(
+              <DataHandling newData={this.state.newEntryData} op="Put" entryData={this.state.entryData}/>
+              )
+            }
             <Header/>
             {this.state.loading ? <LoadingSpinner /> : 
               <Switch>
-                {/* <PropsRoute exact path="/" component={Home} location={cLocation.gps}/> */}
-                {/* <Route exact path="/" component={Home}/> */}
-                <Route exact path="/" render={(routeProps) => <Home {...routeProps} {...this.state.currentLocation}/>}/>
-                {/* <Route 
+                <Route exact path="/" render={(routeProps) => <Home {...routeProps} 
+                                                              currentLocation={this.state.currentLocation}/>}/>
+                <Route 
                   path="/route" 
-                  component={MapRoute}/> */}
+                  render={(routeProps) => <MapRoute {...routeProps} 
+                                           data={this.state.entryData}/>}/>
                 <Route path="/splash" component={Splash}/>
                 <Route path="/settings" component={Settings}/>
-                {/* <Route 
+                <Route 
                   path="/newEntry" 
-                  render={(routeProps) => <NewEntry {...routeProps} {...this.state.currentLocation} {...'newData={this.addNewEntryHandler}'}/>}/>         */}
+                  render={(routeProps) => <NewEntry {...routeProps} 
+                                            currentLocation={this.state.currentLocation} 
+                                            newData={this.addNewEntryHandler}/>}/>        
                 <Route 
                   path="/entries" 
-                  render={(routeProps) => <Entries {...routeProps} {...this.state.entryData}/>}/>
+                  render={(routeProps) => <Entries {...routeProps} entryData={this.state.entryData} newEntry={this.state.newEntryData}/>}/>
               </Switch>
             }
             <Footer/>

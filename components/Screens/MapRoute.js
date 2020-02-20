@@ -2,7 +2,7 @@ import React from 'react';
 import MapContainer from "../../components/Map/MapLogic";
 // import axios from 'axios';
 
-export default function MapRoute() {
+export default function MapRoute(props) {
     
     const markers = (props.data.map((singleEntry) => singleEntry.gps ));
     const locations = (props.data.map((singleEntry) => singleEntry.location.city ));

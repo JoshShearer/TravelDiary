@@ -1,9 +1,7 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import React, { useState } from 'react';
 import { ColorButton } from "../../../components/Button/Button";
 import styled from 'styled-components';
 import ImageHandler from "../../ImageHandler/ImageHandler";
-import DataHandling from "../../DataHandling/DataHandling";
 import { Link } from "react-router-dom";
 import "./NewEntry.css";
 // import { render } from '@testing-library/react';
@@ -44,24 +42,15 @@ const Table = styled.table `
 
 const NewEntry = (props) => {
  
-    const [dataState, setDataState] = useState([]);
     const [title, setTitle] = useState("");
     const [info, setInfo] = useState("");
     const [images, setImages] = useState([]);
     const [imageType, setImageType] = useState([]);
-    const [date, setDate] = useState("");
-    const [time, setTime] = useState("");
-    // const [gps, setGPS] = useState([]);
-    const [location, setLocation] = useState([]);
-    const [intervalIsSet, setIntervalIsSet] = useState(false);
-    // const [idToDelete, setIdToDelete] = useState(null);
-    // const [idToUpdate, setIdToUpdate] = useState(null);
-    // const [updateToApply, setUpdateToApply] = useState(null);
-    // myCallBack = myCallBack.bind(this)
+
 
     var findDate = new Date();
-    setDate((findDate.getMonth()+1) + "-" + findDate.getDate() + "-" + findDate.getFullYear());
-    setTime(findDate.getHours() + ":" + findDate.getMinutes() + ":" + findDate.getSeconds());
+    // setDate((findDate.getMonth()+1) + "-" + findDate.getDate() + "-" + findDate.getFullYear());
+    // setTime(findDate.getHours() + ":" + findDate.getMinutes() + ":" + findDate.getSeconds());
   
 
     const titleHandler = event => {
@@ -112,11 +101,11 @@ const NewEntry = (props) => {
                 </thead>
                 <tbody>
                   <tr>
-                    <th>Date: {date}</th>
+                    <th>Date: {((findDate.getMonth()+1) + "-" + findDate.getDate() + "-" + findDate.getFullYear())}</th>
                     <th>City: {props.currentLocation.city} </th>
                   </tr>
                   <tr>
-                    <th>Time: {time}</th>
+                    <th>Time: {(findDate.getHours() + ":" + findDate.getMinutes() + ":" + findDate.getSeconds())}</th>
                     <th>Latitude: {"\t"} {Number(props.currentLocation.gps.lat).toFixed(4)}</th>
                   </tr>
                   <tr>
@@ -129,7 +118,16 @@ const NewEntry = (props) => {
               Add some photos!
               <ImageHandler className="filepond--item" preview={false} parentFileCallback={myCallBack}/>
               <br/><br/>
-              <ColorButton    onClick={() => props.newData(title)}
+              <ColorButton    onClick={() => props.newData({
+                                                            title: title,
+                                                            info: info,
+                                                            images: images,
+                                                            imageType:imageType,
+                                                            date: ((findDate.getMonth()+1) + "-" + findDate.getDate() + "-" + findDate.getFullYear()),
+                                                            time: (findDate.getHours() + ":" + findDate.getMinutes() + ":" + findDate.getSeconds()),
+                                                            location: ({...props.currentLocation}),
+                                                            gps: props.currentLocation.gps}
+                                                          )}
                               component={Link}
                               to="/entries"
                             >
@@ -140,3 +138,4 @@ const NewEntry = (props) => {
 }
 
 export default NewEntry;
+

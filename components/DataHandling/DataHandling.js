@@ -11,20 +11,20 @@ import axios from 'axios';
         Interval: 0
     }
   }
-    componentDidMount() {
-    this.getDataFromDb();
-    if (!this.state.intervalIsSet) {
-        let interval = this.setState({Interval: 2000});
-        this.setState({intervalIsSet:interval});
-    }
-    return function unmounting() {
-        if (this.state.intervalIsSet) {
-        clearInterval(this.state.intervalIsSet);
-        this.setState({intervalIsSet:null});
-        console.log("unmounting now");
-        }
-       };
-    };
+    // componentDidMount() {
+    // this.getDataFromDb();
+    // if (!this.state.intervalIsSet) {
+    //     let interval = this.setState({Interval: 2000});
+    //     this.setState({intervalIsSet:interval});
+    // }
+    // return function unmounting() {
+    //     if (this.state.intervalIsSet) {
+    //     clearInterval(this.state.intervalIsSet);
+    //     this.setState({intervalIsSet:null});
+    //     console.log("unmounting now");
+    //     }
+    //    };
+    // };
     
 
     getDataFromDb(){
@@ -37,14 +37,14 @@ import axios from 'axios';
       };
     
 
-    putDataToDB(title) {
-        let currentIds = this.props.newData.map(data => data.id);
+    putDataToDB() {
+        let currentIds = this.props.entryData.map(data => data.id);
         let idToBeAdded = 0;
         while (currentIds.includes(idToBeAdded)) {
           ++idToBeAdded;
         }
         const newEntry = {
-          id: this.props.newData.idToBeAdded,
+          id: idToBeAdded,
           title: this.props.newData.title,
           info: this.props.newData.info,
           img: this.props.newData.images,
@@ -93,7 +93,37 @@ import axios from 'axios';
         });
       }
 
+    checkSwitch = (operation) => {
+
+      switch(operation) {
+    
+        case 'Put':
+          this.putDataToDB();
+          break;
+        
+        case 'Get':
+          this.getDataFromDb();
+          break;
+    
+        case 'Update':
+          this.updateDB();
+          break;
+    
+        case 'Delete':
+          this.deleteFromDB();
+          break;
+    
+        default:
+          // Alert.alert("NUMBER NOT FOUND");
+      
+        }
+    
+    }
+
+
       render(){
+        // this.getDataFromDb()
+        this.checkSwitch(this.props.op)
         return(
           <div></div>
         )

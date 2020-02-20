@@ -1,27 +1,30 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import DataContainer from "../EntryContainer/EntryContainer";
-import axios from 'axios';
 import styled from 'styled-components';
 
 const Component = styled.div `
   background: papayawhip;
 `
- export default function Entries(props) {  
+function Entries(props) {  
 
   
     return (
         <Component>
-            {props.EntryData ? (
-                (props.EntryData.map((singleEntry) =>
+            {props.entryData ? (
+                (props.entryData.map((singleEntry) =>
                     <DataContainer data={singleEntry} key={singleEntry.id}/>
                 ))
             ) : (
-                <h1>No Entries.  Start Diary now.  Select Add Entry Below. i need to make this much longer in the event that it is covered up by the header</h1>
+                <h1>No Entries.  Start Diary now.  Select Add Entry Below. </h1>
             )}
         </Component>
 
     );
-   
 }
+// function propChange(prevProps, nextProps) {
+//     const lastIndex = nextProps.entryData.length - 1
+//     return nextProps.newEntry.time === nextProps.entryData[lastIndex].time
+// }
 
-
+//  export default React.memo(Entries, propChange);
+ export default Entries;

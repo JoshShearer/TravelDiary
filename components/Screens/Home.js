@@ -5,7 +5,7 @@ export default class Home extends Component{
 
     render (){
         const mapStyles = {width: '100%', height: '100%'}
-        const currentLocation = this.props.gps;
+        const currentLocation = this.props.currentLocation.gps;
         
         return (
             
