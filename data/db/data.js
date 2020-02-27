@@ -1,83 +1,83 @@
-export const journalEntries = [
+export const JournalEntries = [
     {
         id: 0,
-        title: "This is my test data for loading into react",
+        title: "Sequim",
         info: "This is a dummy entry for the data demonstration purposes as I develop my application",
         img: "img/me.jpg",        
         date: "07/24/2018",
         time: "12:00",
-        gps: "{lat: 36.174305, lng: -115.154568}",
-    }
+        gps: "{lat: 48.164129, lng: -123.140302}",
+    },
     {
         id: 1,
-        title: "This is my test data for loading into react",
+        title: "Bellingham",
         info: "This is a dummy entry for the data demonstration purposes as I develop my application",
         img: "img/me.jpg",        
         date: "07/24/2018",
         time: "12:00",
-        gps: "{lat: 36.174305, lng: -115.154568}",
-    }
+        gps: "{lat: 48.696160, lng: -122.619333}",
+    },
     {
         id: 2,
-        title: "This is my test data for loading into react",
+        title: "Portland",
         info: "This is a dummy entry for the data demonstration purposes as I develop my application",
         img: "img/me.jpg",        
         date: "07/24/2018",
         time: "12:00",
-        gps: "{lat: 36.174305, lng: -115.154568}",
-    }
+        gps: "{lat: 45.508819, lng: -122.672262}",
+    },
     {
         id: 3,
-        title: "This is my test data for loading into react",
+        title: "Bend",
         info: "This is a dummy entry for the data demonstration purposes as I develop my application",
         img: "img/me.jpg",        
         date: "07/24/2018",
         time: "12:00",
-        gps: "{lat: 36.174305, lng: -115.154568}",
-    }
+        gps: "{lat: 44.060293, lng: -121.307341}",
+    },
     {
         id: 4,
-        title: "This is my test data for loading into react",
+        title: "Crater Lake",
         info: "This is a dummy entry for the data demonstration purposes as I develop my application",
         img: "img/me.jpg",        
         date: "07/24/2018",
         time: "12:00",
-        gps: "{lat: 36.174305, lng: -115.154568}",
-    }
+        gps: "{lat: 42.937531, lng: -122.149054}",
+    },
     {
         id: 5,
-        title: "This is my test data for loading into react",
+        title: "Redwoods",
         info: "This is a dummy entry for the data demonstration purposes as I develop my application",
         img: "img/me.jpg",        
         date: "07/24/2018",
         time: "12:00",
-        gps: "{lat: 36.174305, lng: -115.154568}",
-    }
+        gps: "{lat: 41.369269, lng: -124.019056}",
+    },
     {
         id: 6,
-        title: "This is my test data for loading into react",
+        title: "Hollywood",
         info: "This is a dummy entry for the data demonstration purposes as I develop my application",
         img: "img/me.jpg",        
         date: "07/24/2018",
         time: "12:00",
-        gps: "{lat: 36.174305, lng: -115.154568}",
-    }
+        gps: "{lat: 33.993680, lng: -118.473412}",
+    },
     {
         id: 7,
-        title: "This is my test data for loading into react",
+        title: "Tijuana",
         info: "This is a dummy entry for the data demonstration purposes as I develop my application",
         img: "img/me.jpg",        
         date: "07/24/2018",
         time: "12:00",
-        gps: "{lat: 36.174305, lng: -115.154568}",
-    }
+        gps: "{lat: 32.526756, lng: -117.033894}",
+    },
     {
         id: 8,
-        title: "This is my test data for loading into react",
+        title: "Cabo",
         info: "This is a dummy entry for the data demonstration purposes as I develop my application",
         img: "img/me.jpg",        
         date: "07/24/2018",
         time: "12:00",
-        gps: "{lat: 36.174305, lng: -115.154568}",
+        gps: "{lat: 22.877779, lng: -109.903352}",
     }
 ]
