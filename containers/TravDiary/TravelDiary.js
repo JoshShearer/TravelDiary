@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
+import throttle from 'lodash.throttle';
 // import './TravelDiary.css';
 import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
 import "bootstrap/dist/css/bootstrap.min.css";
 import Splash from "../../components/Screens/Splash";
+import LoadData from "../../components/LoadData/LoadData";
 import Settings from "../../components/Screens/Settings";
 import NewEntry from "../../components/Screens/NewEntry/NewEntry";
 import MapRoute from "../../components/Screens/MapRoute";
@@ -10,8 +12,9 @@ import Home from "../../components/Screens/Home";
 import Entries from "../../components/Screens/Entries";
 import Header from "../../components/Header/Header";
 import Footer from "../../components/Footer/Footer";
-import DataHandling from "../../components/DataHandling/DataHandling"
-import CurrentLocation from "../../components/LocationUpdate/currentLocation"
+import DataHandling from "../../components/DataHandling/DataHandling";
+import CurrentLocation from "../../components/LocationUpdate/currentLocation";
+
 // import styled from "styled-components";
 import LoadingSpinner from '../../components/Loading/LoadingSpinner';
 
@@ -22,7 +25,8 @@ class TravelDiary extends Component {
     super();
     this.getCurrentLocationHandler = this.getCurrentLocationHandler.bind(this);
     this.addNewEntryHandler = this.addNewEntryHandler.bind(this);
-    this.getAllEntriesFromDB = this.getAllEntriesFromDB.bind(this);
+    this.getAllEntriesFromDB = this.getAllEntriesFromDB.bind(this)
+    this.getAllEntriesFromDBThrottled = throttle(this.getAllEntriesFromDB,3000)
 
     this.state = {
       currentLocation:{   
@@ -73,26 +77,34 @@ class TravelDiary extends Component {
       //    data: ""
       //    }
       //   ],
-        fileUploaded: false
+        fileUploaded: false,
+        deleteEntry: false,
+        dataLoading: true,
+        idToDelete: 0,
+        dbOperation: "Get"
     };
   }
   componentDidMount(){
     this.setState({loading: false})
   }
-  
-
   getCurrentLocationHandler = (cLocation) => {
     this.setState({ loading: true }, () => {
       this.setState({currentLocation: cLocation})
       this.setState({ loading: false})
     }); 
   }
-
-  addImages = () => {
-
+  finishLoadingHandler = (setLoading) => {
+    this.setState({dataLoading:setLoading})
   }
+  dataLocationHandler = (Data) => {
+    this.setState({ loading: true }, () => {
+      this.setState({currentLocation: Data})
+      this.setState({ loading: false})
+    }); 
+    }
   addNewEntryHandler = (EData) => {
     this.setState({ fileUploaded: true, 
+                    dbOperation: "Put",
                     newEntryData: EData}, () => {
       
       this.setState({ fileUploaded: false})
@@ -101,8 +113,12 @@ class TravelDiary extends Component {
   getAllEntriesFromDB = (allData) => {
     this.setState({entryData:allData})
   }
-  addEntryToDB = () => {
-
+  deleteEntryHandler = (idToDelete) => {
+    this.setState({ fileUploaded: true }, () => {
+      this.setState({dbOperation: "Delete",
+                     idToDelete: idToDelete})
+      this.setState({ fileUploaded: false})
+    });
   }
 
   render(){
@@ -113,11 +129,13 @@ class TravelDiary extends Component {
           <div className="TravelDiary">
           {console.log('loaded TravelDiary')}
             <CurrentLocation DataPass={this.getCurrentLocationHandler}/>
-            
+            {/* {this.state.dataLoading &&
+              <LoadData newData={this.addNewEntryHandler} finish={this.finishLoadingHandler}/>
+              } */}
             {!this.state.fileUploaded ? (
-              <DataHandling EData={this.getAllEntriesFromDB} op="Get"/>
+              <DataHandling EData={this.getAllEntriesFromDBThrottled} op="Get"/>
               ):(
-              <DataHandling newData={this.state.newEntryData} op="Put" entryData={this.state.entryData}/>
+              <DataHandling newData={this.state.newEntryData} op={this.state.dbOperation} entryData={this.state.entryData} idToDelete={this.state.idToDelete}/>
               )
             }
             <Header/>
@@ -138,7 +156,11 @@ class TravelDiary extends Component {
                                             newData={this.addNewEntryHandler}/>}/>        
                 <Route 
                   path="/entries" 
-                  render={(routeProps) => <Entries {...routeProps} entryData={this.state.entryData} newEntry={this.state.newEntryData}/>}/>
+                  render={(routeProps) => <Entries {...routeProps} 
+                                            entryData={this.state.entryData} 
+                                            newEntry={this.state.newEntryData}
+                                            remove={this.deleteEntryHandler}
+                                            />}/>
               </Switch>
             }
             <Footer/>
@@ -149,8 +171,3 @@ class TravelDiary extends Component {
 }
 
 export default TravelDiary;
-/*
-Screen Definitions
-Splash => Home => Settings/Add Entry/All Entries
-
-*/
