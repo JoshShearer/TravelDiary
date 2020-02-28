@@ -2,29 +2,21 @@ import React from 'react';
 import DataContainer from "../EntryContainer/EntryContainer";
 import styled from 'styled-components';
 
-const Component = styled.div `
-  background: papayawhip;
-`
 function Entries(props) {  
 
   
     return (
-        <Component>
-            {props.entryData ? (
+        <div>
+            {props.entryData.length ? (
                 (props.entryData.map((singleEntry) =>
-                    <DataContainer data={singleEntry} key={singleEntry.id}/>
+                    <DataContainer data={singleEntry} key={singleEntry.id} remove={props.remove}/>
                 ))
             ) : (
                 <h1>No Entries.  Start Diary now.  Select Add Entry Below. </h1>
             )}
-        </Component>
+        </div>
 
     );
 }
-// function propChange(prevProps, nextProps) {
-//     const lastIndex = nextProps.entryData.length - 1
-//     return nextProps.newEntry.time === nextProps.entryData[lastIndex].time
-// }
 
-//  export default React.memo(Entries, propChange);
  export default Entries;

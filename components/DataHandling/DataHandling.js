@@ -10,22 +10,7 @@ import axios from 'axios';
         intervalIsSet: false,
         Interval: 0
     }
-  }
-    // componentDidMount() {
-    // this.getDataFromDb();
-    // if (!this.state.intervalIsSet) {
-    //     let interval = this.setState({Interval: 2000});
-    //     this.setState({intervalIsSet:interval});
-    // }
-    // return function unmounting() {
-    //     if (this.state.intervalIsSet) {
-    //     clearInterval(this.state.intervalIsSet);
-    //     this.setState({intervalIsSet:null});
-    //     console.log("unmounting now");
-    //     }
-    //    };
-    // };
-    
+  }    
 
     getDataFromDb(){
         axios

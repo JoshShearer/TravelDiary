@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import MapContainer from "../Map/GPSCollection";
+import DeleteButton from "../CustomButtons/DeleteButton";
 // import CurrentLocation from "./Map";
 import "./EntryContainer.css"
 import styled from 'styled-components';
@@ -24,24 +25,28 @@ export default class DataContainer extends Component {
                               static='true'/>
             </sidebar>
             <article>
-            <h4>{displayData.title}</h4>
-              <p>{displayData.info}<br/><br/>
-                <br/>Date:{displayData.date}
-                <br/>Time:{displayData.time}
-                <br/></p>
-                {displayData.location !== undefined ?
-                  <p>Location:{displayData.location.city}</p>
-                  : <p>Error: Trouble Finding Location</p>
-              }
+              <DeleteButton id={displayData.id} onClick={() => this.props.remove(displayData.id)}/>
+              <h4>{displayData.title}
+                
+              </h4>
+                <p>{displayData.info}<br/><br/>
+                  <br/>Date:{displayData.date}
+                  <br/>Time:{displayData.time}
+                  <br/>
+                </p>
+                  {displayData.location !== undefined ?
+                    <p>Location:{displayData.location.city}</p>
+                    : <p>Error: Trouble Finding Location</p>
+                }
             </article>
         </section>
         <div>
-          {displayData.images !== undefined ? 
+          {/* {displayData.images !== undefined ? 
             (displayData.images.map((image) => 
               <input type="file" class="filepond" name="cover"/>))
               // photo={image} imagePreview={true}/>))
               : <h1>No Photos Found</h1>
-          }
+          } */}
           <br/>
         </div>
       </div>

@@ -9,21 +9,15 @@ import "./NewEntry.css";
 const Input = styled.input `
   padding: 0.5em;
   margin: 0.5em;
-  color: "palevioletred"};
-  background: papayawhip;
+  ${'' /* color: "palevioletred"}; */}
   border: 2px solid orange;
   border-radius: 8px;
-`;
-
-const Component = styled.div `
-  background: papayawhip;
 `;
 
 const Textarea = styled.textarea `
   padding: 0.5em;
   margin: 0.5em;
-  color: "palevioletred"};
-  background: papayawhip;
+  ${'' /* color: "palevioletred"}; */}
   padding: 10px;
   border: 2px solid orange;
   border-radius: 8px;
@@ -76,7 +70,7 @@ const NewEntry = (props) => {
     };
 
       return (
-          <Component className="NewEntry">
+          <div className="NewEntry">
               <h2>Journal Entry</h2>
               <Input  type="text" 
                       placeholder="Title" 
@@ -132,8 +126,9 @@ const NewEntry = (props) => {
                               to="/entries"
                             >
                   Entry Finished
-              </ColorButton>       
-          </Component>
+              </ColorButton>  
+              <br/><br/><br/><br/><br/><br/>.
+          </div>
       );
 }
 

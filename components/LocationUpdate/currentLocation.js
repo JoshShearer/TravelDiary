@@ -31,9 +31,6 @@ nLocation(){
                                   country: locationData.country
                                 })
                       }) 
-            // console.log("DataPass")  
-            // console.log(DataPass)
-            // this.props.DataPass(DataPass)
         .catch(err => console.log(err));
     }
   
@@ -47,7 +44,6 @@ nLocation(){
 
 render(){
   return(
-    // <div>{console.log("quick test")}testing</div>
     <div></div>
   )
 }

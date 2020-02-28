@@ -35,8 +35,6 @@ const MapContainer = (props) => {
     const displayMarkers = () => {
 
             return props.locationArray.map((store, index) => {
-                // console.dir(store)
-                // console.dir(index)
                 return <Marker  key={index} 
                                 id={index} 
                                 position={store}
@@ -47,9 +45,6 @@ const MapContainer = (props) => {
     const displayInfoWindow = () => {
        
             return props.infoWindows.map((store, index) => {
-                console.dir(store)
-                console.dir(index)
-                console.dir(props.locationArray[index])
                 return <InfoWindow  location={props.locationArray[index]} 
                                     visible={showingInfoWindow} 
                                     onClose={onClose()}
@@ -67,7 +62,6 @@ const MapContainer = (props) => {
                                                         lng: Number(loc.lng)}))
         var bounds = new props.google.maps.LatLngBounds();
         locations.map(loc => bounds.extend(loc))
-        console.dir(bounds)
         setBounds(bounds)
     }
       
@@ -77,10 +71,8 @@ const MapContainer = (props) => {
                     google={props.google}
                     // onClick={onMapClicked()}
                     style={props.mapSize} 
-                    // onReady={execute}
-                    // visible={locationSet}
-                    initialCenter={{ lat: -46.174305, 
-                                    lng: -115.154568}}
+                    initialCenter={{ lat: -27.572544, 
+                                    lng: -48.424597}}
                     bounds={bounds}
                     >
                 

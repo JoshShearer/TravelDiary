@@ -96,16 +96,10 @@ export default class ImageHandler extends Component {
                 
               });
               this.uploadFiles();
-              console.log(`photo files ${this.state.files[0]}`)
-              console.log(`uploaded? ${this.state.fileUploaded}`)
             }}
         />        
       </div>
     );
-    
   }
  }
 
-// FilePond.parse(document.body);
-// this.state.files !== undefined &&
-// module.exports = this.state.files;
