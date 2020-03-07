@@ -38,4 +38,4 @@ diarySchema.virtual('imagePath').get(function(){
 })
 
 //Export the Mongoose Model
-module.exports = mongoose.model("DiarySchema", diarySchema)
+module.exports = mongoose.model('DiarySchema', diarySchema);

@@ -59,8 +59,8 @@ router.post('/putData', async (req, res) => {
     id: req.body.id,
     title: req.body.title,
     info: req.body.info,
-    // images: req.body.images,
-    // imageTypes: req.body.imageType,
+    images: req.body.images,
+    imageTypes: req.body.imageType,
     date: req.body.date,
     time: req.body.time,
     gps: req.body.gps,
@@ -79,9 +79,9 @@ router.post('/putData', async (req, res) => {
 
 //Delete Entire Entry
  router.delete('/deleteData', (req, res) => {
-        const { id } = req.body;
-        const diarySchema = new DiarySchema();
-        diarySchema.findByIdAndRemove(id, err => {
+        const id = req.body.id;
+        
+        DiarySchema.findByIdAndDelete(id, err => {
             if (err) return res.send(err);
             return res.json({ success: true });
         });
