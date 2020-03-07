@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { ColorButton } from "../../../components/Button/Button";
+import { makeStyles } from "@material-ui/core/styles";
 import styled from 'styled-components';
 import ImageHandler from "../../ImageHandler/ImageHandler";
 import { Link } from "react-router-dom";
@@ -68,6 +69,14 @@ const NewEntry = (props) => {
       }
         console.log(`handler ${handlerFileData}`);
     };
+
+    const useStyles = makeStyles({
+      avatar: {
+        // backgroundColor: blue[100],
+        // color: blue[600],
+        float:"left!important",
+      },
+    });
 
       return (
           <div className="NewEntry">

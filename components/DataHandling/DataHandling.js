@@ -22,8 +22,8 @@ import axios from 'axios';
       };
     
 
-    putDataToDB() {
-        let currentIds = this.props.entryData.map(data => data.id);
+    putDataToDB(entryData) {
+        let currentIds = entryData.map(data => data.id);
         let idToBeAdded = 0;
         while (currentIds.includes(idToBeAdded)) {
           ++idToBeAdded;
@@ -47,12 +47,13 @@ import axios from 'axios';
           .catch(err => console.log(err));
       };
 
-    deleteFromDB = idToDelete => {
+    deleteFromDB(idToDelete) {
         parseInt(idToDelete);
         let objectToDelete = null;
-        this.props.delData.forEach(dat => {
+        this.props.entryData.forEach(dat => {
           if (dat.id === idToDelete) {
-            objectToDelete = dat.id;
+            objectToDelete = dat._id;
+            console.log(objectToDelete)
           }
         });
     
@@ -83,7 +84,7 @@ import axios from 'axios';
       switch(operation) {
     
         case 'Put':
-          this.putDataToDB();
+          this.putDataToDB(this.props.entryData);
           break;
         
         case 'Get':
@@ -95,7 +96,7 @@ import axios from 'axios';
           break;
     
         case 'Delete':
-          this.deleteFromDB();
+          this.deleteFromDB(this.props.idToDelete);
           break;
     
         default:

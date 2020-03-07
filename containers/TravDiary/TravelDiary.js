@@ -4,6 +4,7 @@ import throttle from 'lodash.throttle';
 import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
 import "bootstrap/dist/css/bootstrap.min.css";
 import Splash from "../../components/Screens/Splash";
+import LoadData from "../../components/LoadData/LoadData";
 import Settings from "../../components/Screens/Settings";
 import NewEntry from "../../components/Screens/NewEntry/NewEntry";
 import MapRoute from "../../components/Screens/MapRoute";
@@ -25,7 +26,7 @@ class TravelDiary extends Component {
     this.getCurrentLocationHandler = this.getCurrentLocationHandler.bind(this);
     this.addNewEntryHandler = this.addNewEntryHandler.bind(this);
     this.getAllEntriesFromDB = this.getAllEntriesFromDB.bind(this);
-    this.getAllEntriesFromDBThrottled = throttle(this.getAllEntriesFromDB,2000)
+    this.getAllEntriesFromDBThrottled = throttle(this.getAllEntriesFromDB,3000)
     this.deleteEntryHandler = this.deleteEntryHandler.bind(this);
 
     this.state = {
@@ -77,23 +78,21 @@ class TravelDiary extends Component {
       //    data: ""
       //    }
       //   ],
-        dataSettled: false,
-        entryHandled: true,
-        dataCaptured: true,
-        fileDeleted: true,
+        fileUploaded: false,
+        deleteEntry: false,
+        dataLoading: true,
         idToDelete: 0,
+        dataUpdated: true,
         dbOperation: "Get"
     };
   }
-  componentDidMount(){
-    this.setState({loading: false})
+  componentDidUpdate(prevProps, prevState){
+    // if (prevState.entryData.length !== this.state.entryData.length || this.state.fileUploaded){
+      if (!this.state.fileUploaded && !this.state.dataUpdated){
+        // this.setState({dbOperation:"Get"})
+        this.forceUpdate();
+    }
   }
-
-  // componentDidUpdate(prevState){
-  //   if (prevState.entryData !== this.state.entryData){
-  //       this.getAllEntriesFromDB(this.state.entryData);
-  //   }
-  // }
   getCurrentLocationHandler = (cLocation) => {
     this.setState({ loading: true }, () => {
       this.setState({currentLocation: cLocation})
@@ -105,51 +104,37 @@ class TravelDiary extends Component {
   }
   dataLocationHandler = (Data) => {
     this.setState({ loading: true }, () => {
-      this.setState({ currentLocation: Data,
-                      loading: false})
+      this.setState({currentLocation: Data})
+      this.setState({ loading: false})
     }); 
     }
   addNewEntryHandler = (EData) => {
-    this.setState({ dataSettled: false, 
+    this.setState({ fileUploaded: true, 
                     dbOperation: "Put",
                     newEntryData: EData,
-                    dataCaptured: false});
-  }
+                    dataUpdated:false}, () => {
+      this.setState({ fileUploaded: false})
+                    })
+                  }
+  
   getAllEntriesFromDB = (allData) => {
-    if (!this.state.dataSettled){
-      if (allData){
-        this.setState({entryData:allData});
-        this.checkSettled(allData);
-      } else{//, () => {
-        this.checkSettled(allData);
+    if(this.state.loading){
+        this.setState({entryData:allData})
+        this.finishLoadingHandler(false)
+    }else if (this.state.fileUploaded){
+      this.setState({ entryData:allData,
+                      fileUploaded:false,
+                      dataUpdated:true})
     }
-  }}
+  }
   deleteEntryHandler = (idToDelete) => {
-    this.setState({ dataSettled: false , 
+    this.setState({ fileUploaded: true, 
                     dbOperation: "Delete",
-                    fileDeleted: false, 
-                    idToDelete: idToDelete});
-    this.checkSettled();
-  }
-  checkSettled (allData) {
-    if (!this.state.dataSettled){
-      if (!this.state.fileDeleted){   //check entry removed
-        this.setState({ fileDeleted: true,
-                        dataSettled: true,
-                        entryHandled: true})
-      } else if (!this.state.dataCaptured) { //Check new entry added
-        if(this.state.entryData[this.state.entryData.length-1].time == this.state.newEntryData.time ){
-          this.setState({  dataCaptured: true,
-                           dataSettled: true,
-                           entryHandled: true})
-        }
-      }
-      else{
-        this.setState({ dataSettled: true})
-      }
+                    idToDelete: idToDelete,
+                    dataUpdated: false}, () => {
+      this.setState({ fileUploaded: false})
+      })
     }
-  }
-
   render(){
 
         return (
@@ -158,8 +143,8 @@ class TravelDiary extends Component {
           <div className="TravelDiary">
           {console.log('loaded TravelDiary')}
             <CurrentLocation DataPass={this.getCurrentLocationHandler}/>
-            {this.state.fileDeleted && this.state.dataCaptured ? (
-              <DataHandling EData={this.getAllEntriesFromDB} op="Get"/>
+            {!this.state.fileUploaded ? (
+              <DataHandling EData={this.getAllEntriesFromDBThrottled} op="Get"/>
               ):(
               <DataHandling newData={this.state.newEntryData} op={this.state.dbOperation} entryData={this.state.entryData} idToDelete={this.state.idToDelete}/>
               )
@@ -184,6 +169,7 @@ class TravelDiary extends Component {
                   path="/entries" 
                   render={(routeProps) => <Entries {...routeProps} 
                                             entryData={this.state.entryData} 
+                                            newEntry={this.state.newEntryData}
                                             remove={this.deleteEntryHandler}
                                             />}/>
               </Switch>
