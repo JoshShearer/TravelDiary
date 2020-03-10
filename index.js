@@ -6,19 +6,10 @@ import App from './App';
 import {BrowserRouter as Router} from 'react-router-dom';
 import "bootstrap/dist/css/bootstrap.min.css";
 import * as serviceWorker from './serviceWorker';
-// import { Helmet } from 'react-helmet';
-
-const TITLE = 'Travel Journal';
-
 
 
 ReactDOM.render(
-<Router>
-{console.log("testing Loader")}
-    {/* <Helmet>
-        <title>{ TITLE }</title>
-        <App/>
-    </Helmet> */}
+<Router basename="https://react-traveldiary.web.app/">
     <App/>
 </Router>
 , document.getElementById('root')

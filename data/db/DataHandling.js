@@ -37,7 +37,7 @@ export default function DataHandling (props) {
 
     const getDataFromDb = () => {
       axios
-        .get("http://localhost:3001/api/getData")
+        .get("http://localhost:5000/api/getData")
         .then(res => {
           setDataState([...res.data.data]);
         })
@@ -63,7 +63,7 @@ export default function DataHandling (props) {
       setDataState([...dataState, newEntry]);
       console.log(newEntry)
       axios
-        .post("http://localhost:3001/api/putData", newEntry)
+        .post("http://localhost:5000/api/putData", newEntry)
         .then(res => console.log(res))
         .catch(err => console.log(err));
     };
@@ -77,7 +77,7 @@ export default function DataHandling (props) {
         }
       });
   
-      axios.delete("http://localhost:3001/api/deleteData", {
+      axios.delete("http://localhost:5000/api/deleteData", {
         data: {
           id: objectToDelete
         }
@@ -93,7 +93,7 @@ export default function DataHandling (props) {
         }
       });
   
-      axios.post("http://localhost:3001/api/updateData", {
+      axios.post("http://localhost:5000/api/updateData", {
         id: objIdToUpdate,
         update: { title: updateToApply }
       });

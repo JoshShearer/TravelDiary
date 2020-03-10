@@ -71,7 +71,7 @@ function Entries(props) {
               className={classes.modalHeader}
             >
               <h4 >
-                <strong>Make a new entry!</strong>
+                <strong>No Entries Found!</strong>
               </h4>
               <DialogActions>
                 <Button

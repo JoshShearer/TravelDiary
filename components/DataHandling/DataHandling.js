@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 
+axios.defaults.baseURL = "https://react-traveldiary.web.app/"
  export default class DataHandling extends Component{
   constructor(props) {
     super(props);
@@ -14,7 +15,7 @@ import axios from 'axios';
 
     getDataFromDb(){
         axios
-          .get("http://localhost:3001/api/getData")
+          .get("http://localhost:5001/api/getData")
           .then(res => {
             this.props.EData([...res.data.data]);
           })
@@ -42,7 +43,7 @@ import axios from 'axios';
         // this.props.newData({dataState:[...dataState, newEntry]});?
         console.log(newEntry)
         axios
-          .post("http://localhost:3001/api/putData", newEntry)
+          .post("http://localhost:5001/api/putData", newEntry)
           .then(res => console.log(res))
           .catch(err => console.log(err));
       };
@@ -57,7 +58,7 @@ import axios from 'axios';
           }
         });
     
-        axios.delete("http://localhost:3001/api/deleteData", {
+        axios.delete("http://localhost:5001/api/deleteData", {
           data: {
             id: objectToDelete
           }
@@ -73,7 +74,7 @@ import axios from 'axios';
           }
         });
     
-        axios.post("http://localhost:3001/api/updateData", {
+        axios.post("http://localhost:5001/api/updateData", {
           id: objIdToUpdate,
           update: { title: updateToApply }
         });
@@ -100,7 +101,6 @@ import axios from 'axios';
           break;
     
         default:
-          // Alert.alert("NUMBER NOT FOUND");
       
         }
     
@@ -108,7 +108,6 @@ import axios from 'axios';
 
 
       render(){
-        // this.getDataFromDb()
         this.checkSwitch(this.props.op)
         return(
           <div></div>

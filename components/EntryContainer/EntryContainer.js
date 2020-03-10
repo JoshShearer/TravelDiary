@@ -84,7 +84,8 @@ export default function DataContainer (props) {
                 }
             </article>
         </section>
-        <div>
+        <br/>
+        {/* <div>
           {props.data.images !== undefined ? 
             (props.data.images.map((image) => 
               <input type="file" class="filepond" name="cover" photo={image} imagePreview={true}/>))
@@ -92,7 +93,7 @@ export default function DataContainer (props) {
               : <h1>No Photos Found</h1>
           } 
           <br/>
-        </div> 
+        </div>  */}
         <Dialog       
             classes={{
               root: classes.center,

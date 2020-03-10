@@ -6,16 +6,16 @@ import styled from "styled-components";
 export default class Header extends React.Component{
     render (){
         return (
-            <NavWrapper className="navbar navbar-expand-lg navbar-dark px-sm-5">
+            <NavWrapper className="navbar navbar-expand-lg justify-content-between">
                 <ul className="navbar-nav align-items-left">
-                    <li className="nav-item ml-5">
+                    <li className="nav-item ml-5 border rounded">
                         <Link to="/route" className="nav-link">
                             Route
                         </Link>
                     </li>
                 </ul>
-                <ul className="navbar-nav align-items-right">
-                    <li className="nav-item ml-5">
+                <ul className="navbar-nav ml-auto">
+                    <li className="nav-item ml-5 border rounded">
                         <Link to='/entries' className="nav-link">
                             Entries
                         </Link>                
@@ -26,10 +26,10 @@ export default class Header extends React.Component{
     }
 }
 
-const NavWrapper = styled.nav 
-`background:var(--mainOrange);
+const NavWrapper = styled.nav`
+background:var(--lightOrange);
 .nav-link{
-color:var(--white);
+color:var(--mainWhite);
 }
 font-weight:bold;
 `;

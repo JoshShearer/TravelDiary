@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import {Map, GoogleApiWrapper, InfoWindow, Marker} from 'google-maps-react';
 
-const MapContainer = (props) => {
+const MapContainer = React.memo(function MapContainer(props) {
         
     const [showingInfoWindow, setShowingInfoWindow] = useState(true);
     const [activeMarker, setActiveMarker] = useState({});
@@ -82,7 +82,7 @@ const MapContainer = (props) => {
                 </Map>
         </div>
     );
-}
+});
 
 export default GoogleApiWrapper({
     apiKey: 'AIzaSyAu9sMNLJ0_hfvGG23wyP-IUDDVks8eGKI'

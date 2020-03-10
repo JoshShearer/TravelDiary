@@ -5,3 +5,10 @@
     bottom: 0;
     width: 100%;
 }
+.botAlign{
+    /* margin-left: auto; */
+    /* clear: left; */
+    /* text-align: right; */
+    /* float: right;*/
+    margin-right: auto;
+}

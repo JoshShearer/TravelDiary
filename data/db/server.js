@@ -10,16 +10,17 @@ const cors = require('cors');
 const logger = require("morgan");
 const DiarySchema = require('./diary')
 const imageMimeTypes = ['image/jpeg', 'image/png', 'images/gif']
+const path = require("path");
 
 //initialize http server
 const app = express();
 app.use(cors());
 // app.options("*", cors());
-const API_PORT = 3001;
+const API_PORT = process.env.PORT || 5001;
 // const router = express.Router();
 
 //Set up the mongoDB connection
-const dbRoute = 'mongodb+srv://joshshear:6408*_sel@cluster0-7x2dt.mongodb.net/test?retryWrites=true&w=majority';
+const dbRoute = 'mongodb+srv://FireBaseApp:fatty999@cluster0-7x2dt.mongodb.net/test?retryWrites=true&w=majority';
 
 mongoose.connect(dbRoute, { useNewUrlParser: true,
                             useFindAndModify: false,
@@ -109,6 +110,15 @@ function saveImage (DiarySchema, imagesEncoded) {
       DiarySchema.imageType[index] = image.type;
   }})}
 
+  // if (process.env.NODE_ENV === 'production') {
+  //   // Serve any static files
+  //   app.use(express.static(path.join(__dirname, 'client/build')));
+      
+  //   // Handle React routing, return all requests to React app
+  //   app.get('*', function(req, res) {
+  //     res.sendFile(path.join(__dirname, 'client/build', 'index.html'));
+  //   });
+  // }
 //append /api for our http requests
 app.use('/api', router);
 

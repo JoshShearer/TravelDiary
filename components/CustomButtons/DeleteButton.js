@@ -2,17 +2,17 @@ import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import IconButton from '@material-ui/core/IconButton';
 import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
-import { orange } from '@material-ui/core/colors';
+import { orange, grey } from '@material-ui/core/colors';
 
 const useStyles = makeStyles(theme => ({
   root: {
     '& > *': {
       margin: theme.spacing(1),
       float: "right",
-      backgroundColor: orange[700],
-      '&:hover': {
-        backgroundColor: orange[900],
-  },
+      // backgroundColor: grey[200],
+      // '&:hover': {
+      //   backgroundColor: grey[700],
+  // },
     },
   },
 }));
