@@ -4,7 +4,6 @@ import throttle from 'lodash.throttle';
 import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
 import "bootstrap/dist/css/bootstrap.min.css";
 import Splash from "../../components/Screens/Splash";
-import LoadData from "../../components/LoadData/LoadData";
 import Settings from "../../components/Screens/Settings";
 import NewEntry from "../../components/Screens/NewEntry/NewEntry";
 import MapRoute from "../../components/Screens/MapRoute";
@@ -14,9 +13,13 @@ import Header from "../../components/Header/Header";
 import Footer from "../../components/Footer/Footer";
 import DataHandling from "../../components/DataHandling/DataHandling";
 import CurrentLocation from "../../components/LocationUpdate/currentLocation";
-
+import LoginPage from "../../components/Screens/LoginPage/LoginPage";
+import SignUp from "../../components/Screens/SignUpPage/SignUpPage";
 // import styled from "styled-components";
 import LoadingSpinner from '../../components/Loading/LoadingSpinner';
+
+
+
 
 
 
@@ -30,6 +33,7 @@ class TravelDiary extends Component {
     this.deleteEntryHandler = this.deleteEntryHandler.bind(this);
 
     this.state = {
+      Auth: true,
       currentLocation:{   
         gps: {lat: '',
               lng: ''},
@@ -86,13 +90,7 @@ class TravelDiary extends Component {
         dbOperation: "Get"
     };
   }
-  componentDidUpdate(prevProps, prevState){
-    // if (prevState.entryData.length !== this.state.entryData.length || this.state.fileUploaded){
-      if (!this.state.fileUploaded && !this.state.dataUpdated){
-        // this.setState({dbOperation:"Get"})
-        this.forceUpdate();
-    }
-  }
+  
   getCurrentLocationHandler = (cLocation) => {
     this.setState({ loading: true }, () => {
       this.setState({currentLocation: cLocation})
@@ -118,14 +116,15 @@ class TravelDiary extends Component {
                   }
   
   getAllEntriesFromDB = (allData) => {
-    if(this.state.loading){
-        this.setState({entryData:allData})
-        this.finishLoadingHandler(false)
-    }else if (this.state.fileUploaded){
-      this.setState({ entryData:allData,
-                      fileUploaded:false,
-                      dataUpdated:true})
-    }
+    this.setState({entryData:allData})
+    //   if(this.state.loading){
+  //       this.setState({entryData:allData})
+  //       this.finishLoadingHandler(false)
+  //   }else if (this.state.fileUploaded){
+  //     this.setState({ entryData:allData,
+  //                     fileUploaded:false,
+  //                     dataUpdated:true})
+  //   }
   }
   deleteEntryHandler = (idToDelete) => {
     this.setState({ fileUploaded: true, 
@@ -140,42 +139,49 @@ class TravelDiary extends Component {
         return (
         
         <Router>
-          <div className="TravelDiary">
-          {console.log('loaded TravelDiary')}
-            <CurrentLocation DataPass={this.getCurrentLocationHandler}/>
-            {!this.state.fileUploaded ? (
-              <DataHandling EData={this.getAllEntriesFromDBThrottled} op="Get"/>
-              ):(
-              <DataHandling newData={this.state.newEntryData} op={this.state.dbOperation} entryData={this.state.entryData} idToDelete={this.state.idToDelete}/>
-              )
-            }
-            <Header/>
-            {this.state.loading ? <LoadingSpinner /> : 
-              <Switch>
-                <Route exact path="/" render={(routeProps) => <Home {...routeProps} 
-                                                              currentLocation={this.state.currentLocation}/>}/>
-                <Route 
-                  path="/route" 
-                  render={(routeProps) => <MapRoute {...routeProps} 
-                                           data={this.state.entryData}/>}/>
-                <Route path="/splash" component={Splash}/>
-                <Route path="/settings" component={Settings}/>
-                <Route 
-                  path="/newEntry" 
-                  render={(routeProps) => <NewEntry {...routeProps} 
-                                            currentLocation={this.state.currentLocation} 
-                                            newData={this.addNewEntryHandler}/>}/>        
-                <Route 
-                  path="/entries" 
-                  render={(routeProps) => <Entries {...routeProps} 
-                                            entryData={this.state.entryData} 
-                                            newEntry={this.state.newEntryData}
-                                            remove={this.deleteEntryHandler}
-                                            />}/>
-              </Switch>
-            }
-            <Footer/>
+         {!this.state.Auth ? (
+            <div>
+              <Route path="/signup" component={SignUp} />
+              <Route exact path="/" component={LoginPage} />
+            </div>
+          ):(
+           <div className="TravelDiary">              
+              <CurrentLocation DataPass={this.getCurrentLocationHandler}/>
+              {!this.state.fileUploaded ? (
+                <DataHandling EData={this.getAllEntriesFromDBThrottled} op="Get"/>
+                ):(
+                <DataHandling newData={this.state.newEntryData} op={this.state.dbOperation} entryData={this.state.entryData} idToDelete={this.state.idToDelete}/>
+                )
+              }
+              
+              <Header/>
+              {this.state.loading ? <LoadingSpinner /> : 
+                <Switch>
+                  <Route exact path="/home" render={(routeProps) => <Home {...routeProps} 
+                                                                currentLocation={this.state.currentLocation}/>}/>
+                  <Route 
+                    path="/route" 
+                    render={(routeProps) => <MapRoute {...routeProps} 
+                                            data={this.state.entryData}/>}/>
+                  <Route path="/splash" component={Splash}/>
+                  <Route path="/settings" component={Settings}/>
+                  <Route 
+                    path="/newEntry" 
+                    render={(routeProps) => <NewEntry {...routeProps} 
+                                              currentLocation={this.state.currentLocation} 
+                                              newData={this.addNewEntryHandler}/>}/>        
+                  <Route 
+                    path="/entries" 
+                    render={(routeProps) => <Entries {...routeProps} 
+                                              entryData={this.state.entryData} 
+                                              newEntry={this.state.newEntryData}
+                                              remove={this.deleteEntryHandler}
+                                              />}/>
+                </Switch>
+              }
+              <Footer/>
           </div>
+          )}
         </Router>
       );
   }
