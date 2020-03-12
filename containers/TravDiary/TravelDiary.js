@@ -160,7 +160,7 @@ class TravelDiary extends Component {
               }
               
               <Header/>
-              {this.state.loading ? <LoadingSpinner /> : 
+              {this.state.loading ? <LoadingSpinner className="align-bottom position-fixed"/> : 
                 <Switch>
                   <Route exact path="/" render={(routeProps) => <Home {...routeProps} 
                                                                 currentLocation={this.state.currentLocation}/>}/>
