@@ -8,7 +8,7 @@ import Settings from "../../components/Screens/Settings";
 import NewEntry from "../../components/Screens/NewEntry/NewEntry";
 import MapRoute from "../../components/Screens/MapRoute";
 import Home from "../../components/Screens/Home";
-import Entries from "../../components/Screens/Entries";
+import Entries from "../../components/Screens/Entries/Entries";
 import Header from "../../components/Header/Header";
 import Footer from "../../components/Footer/Footer";
 import DataHandling from "../../components/DataHandling/DataHandling";
@@ -167,7 +167,8 @@ class TravelDiary extends Component {
                   <Route 
                     path="/route" 
                     render={(routeProps) => <MapRoute {...routeProps} 
-                                            data={this.state.entryData}/>}/>
+                                            data={this.state.entryData}
+                                            currentLocation={this.state.currentLocation}/>}/>
                   <Route path="/splash" component={Splash}/>
                   <Route path="/settings" component={Settings}/>
                   <Route 

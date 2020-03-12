@@ -126,6 +126,8 @@ export default function LoginPage(props) {
                   <CardFooter className={classes.cardFooter}>
                     <Button simple color="primary" size="lg"
                             onClick={() => props.isAuthorized(true)}
+                            component={Link}
+                            to="/"
                              >
                       Enter
                     </Button>

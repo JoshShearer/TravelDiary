@@ -1,11 +1,13 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, forwardRef } from 'react';
 import {Map, GoogleApiWrapper, InfoWindow, Marker} from 'google-maps-react';
+import Slide from "@material-ui/core/Slide";
+import RouteModal from "../../components/Modal/RouteModal"
 
 const MapContainer = React.memo(function MapContainer(props) {
         
     const [showingInfoWindow, setShowingInfoWindow] = useState(true);
-    const [activeMarker, setActiveMarker] = useState({});
-    const [selectedPlace, setSelectedPlace] = useState({});
+    const [, setActiveMarker] = useState({});
+    const [, setSelectedPlace] = useState({});
     const [bounds, setBounds] = useState({});
 
     useEffect(() => {
@@ -14,19 +16,13 @@ const MapContainer = React.memo(function MapContainer(props) {
         
       }, []);
 
-    const onMapClicked = (props) => {
-        if (showingInfoWindow) {
-            setShowingInfoWindow(false)
-            setActiveMarker(null)
-          }
-      };
 
-    const onMarkerClick = (props, marker, e) => {
+    const onMarkerClick = (props, marker) => {
             setSelectedPlace(props);
             setActiveMarker(marker);
             setShowingInfoWindow(true);
         };
-    const onClose = props => {
+    const onClose = () => {
         if (showingInfoWindow){
                 setShowingInfoWindow(false);
                 setActiveMarker(null);
@@ -63,10 +59,19 @@ const MapContainer = React.memo(function MapContainer(props) {
         var bounds = new props.google.maps.LatLngBounds();
         locations.map(loc => bounds.extend(loc))
         setBounds(bounds)
+
+
+    const Transition = forwardRef(function Transition(props, ref) {
+        return <Slide direction="down" ref={ref} {...props} />;
+        });
+        
+        Transition.displayName = "Transition";
+        
     }
       
     return(
         <div>
+         {bounds.length ? (
             <Map
                     google={props.google}
                     // onClick={onMapClicked()}
@@ -79,7 +84,29 @@ const MapContainer = React.memo(function MapContainer(props) {
                     {displayMarkers()}
                     {displayInfoWindow()}
 
+            </Map>
+                ) : (
+            <div>
+                <Map
+                    google={props.google}
+                    // onClick={onMapClicked()}
+                    style={props.mapSize} 
+                    initialCenter={props.currentLocation.gps}
+                    >
+                    <Marker onClick={props.currentLocation.city} name={props.currentLocation.city} />
+                    <InfoWindow
+                        marker={props.currentLocation.city}
+                        visible="true"
+                        // onClose={this.onClose}
+                        >
+                        <div>
+                            <h4>{props.currentLocation.city}</h4>
+                        </div>
+                    </InfoWindow>
                 </Map>
+                <RouteModal/>
+            </div>
+      )}
         </div>
     );
 });

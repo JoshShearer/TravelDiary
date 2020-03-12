@@ -11,7 +11,7 @@ export default class Footer extends React.Component{
                 <NavWrapper className="navbar navbar-expand-lg justify-content-between">
                     <ul className="navbar-nav">
                         <li className="nav-item ml-5 border rounded">
-                            <Link to="/home" className="nav-link">
+                            <Link to="/" className="nav-link">
                                 Home
                             </Link>
                         </li>

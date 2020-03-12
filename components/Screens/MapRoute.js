@@ -18,7 +18,7 @@ const MapRoute = React.memo(function MapRoute(props) {
     return (
         <React.Fragment>
             <div>
-                <MapContainer mapSize={mapStyles} locationArray={markers} infoWindows={locations}/>
+                <MapContainer mapSize={mapStyles} locationArray={markers} infoWindows={locations} currentLocation={props.currentLocation}/>
             </div>
         </React.Fragment>  
     );

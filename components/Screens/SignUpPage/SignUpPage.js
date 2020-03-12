@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from 'react-router-dom';
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
 import InputAdornment from "@material-ui/core/InputAdornment";
@@ -162,6 +163,8 @@ export default function LoginPage(props) {
                   <CardFooter className={classes.cardFooter}>
                     <Button simple color="primary" size="lg"
                             onClick={() => props.isAuthorized(true)}
+                            component={Link}
+                            to="/"
                              >
                       Next
                     </Button>
