@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from 'react-router-dom';
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
 import InputAdornment from "@material-ui/core/InputAdornment";
@@ -18,6 +19,9 @@ import CardHeader from "../../../components/Card/CardHeader.js";
 import CardFooter from "../../../components/Card/CardFooter.js";
 import CustomInput from "../../../components/CustomInput/CustomInput.js";
 import Parallax from "../../../components/Parallax/Parallax.js";
+import SocialMediaLogin from '../../../components/SocialMediaLogin/SocialMediaLogin.js'
+import "./LoginPage.css";
+
 
 import styles from "../../../assets/jss/material-kit-react/views/loginPage.js";
 
@@ -25,25 +29,35 @@ import styles from "../../../assets/jss/material-kit-react/views/loginPage.js";
 
 const useStyles = makeStyles(styles);
 
+
 export default function LoginPage(props) {
   const [cardAnimaton, setCardAnimation] = React.useState("cardHidden");
+
   setTimeout(function() {
     setCardAnimation("");
   }, 700);
+
+  const responseGoogle = (response) => {
+    console.log(response);
+  }
+  const responseFacebook = (response) => {
+    console.log(response);
+  }
+
   const classes = useStyles();
   return (
     <div>
       <Parallax image={require("../../../assets/img/Sunrise.jpg")}>
         <div className={classes.conatiner}>
           <GridContainer justify="center">
-            <GridItem xs={12} sm={12} md={5}>
+            <GridItem xs={12} sm={12} md={4}>
               <Card className={classes[cardAnimaton]}>
                 <form className={classes.form}>
                   <CardHeader color="orange" className={classes.cardHeader}>
                     
                     <h1>Travel Diary</h1>
                     <h4>Login</h4>
-                    <div className={classes.socialLine}>
+                    {/* <div className={classes.socialLine}>
                       <Button
                         justIcon
                         href="#pablo"
@@ -71,7 +85,7 @@ export default function LoginPage(props) {
                       >
                         <i className={"fab fa-google-plus-g"} />
                       </Button>
-                    </div>
+                    </div> */}
                   </CardHeader>
                   {/* <p className={classes.divider}>Or Be Classical</p> */}
                   <CardBody>
@@ -110,7 +124,9 @@ export default function LoginPage(props) {
                     />
                   </CardBody>
                   <CardFooter className={classes.cardFooter}>
-                    <Button simple color="primary" size="lg">
+                    <Button simple color="primary" size="lg"
+                            onClick={() => props.isAuthorized(true)}
+                             >
                       Enter
                     </Button>
                   </CardFooter>
@@ -118,9 +134,13 @@ export default function LoginPage(props) {
                   <CardFooter className={classes.cardFooter}>
                   <Button  href="signup" simple color="primary" >
                     Sign up here
-                  </Button>           
+                  </Button>   
                   </CardFooter>       
-                  <br/><br/>
+                  <h6 className="text-center">Or</h6> 
+                  <br/>
+                  <div className="d-flex justify-content-center">
+                    <SocialMediaLogin />
+                  </div>
                 </form>
               </Card>
             </GridItem>

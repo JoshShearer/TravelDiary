@@ -85,6 +85,36 @@ const signupPageStyle = {
   },
   inputIconsColor: {
     color: "#495057"
+  },
+  fbLoginButton: {
+    width: "165px",
+    height:"40px",  
+    borderRadius: "4px",
+    background: "#3b5998",
+    color:"white",
+    border:"0px transparent",  
+    textAlign: "center",
+    margin:"5px",
+    display: "inline-block",
+    "&:hover": {
+      background: "#3b5998",
+      opacity: "0.6"
+    }
+  },
+  googleLoginButton: {
+    width: "165px",
+    height:"40px",  
+    borderRadius: "4px",
+    backgroundColor: "#db3236 !important",
+    color:"white",
+    border:"0px transparent",  
+    textAlign: "center",
+    margin:"5px",
+    display: "inline-block",
+    "&:hover": {
+      background: "#db3236",
+      opacity: "0.6"
+    }
   }
 };
 

@@ -31,9 +31,10 @@ class TravelDiary extends Component {
     this.getAllEntriesFromDB = this.getAllEntriesFromDB.bind(this);
     this.getAllEntriesFromDBThrottled = throttle(this.getAllEntriesFromDB,3000)
     this.deleteEntryHandler = this.deleteEntryHandler.bind(this);
+    this.authorizationComplete = this.authorizationComplete.bind(this);
 
     this.state = {
-      Auth: true,
+      auth: false,
       currentLocation:{   
         gps: {lat: '',
               lng: ''},
@@ -134,15 +135,19 @@ class TravelDiary extends Component {
       this.setState({ fileUploaded: false})
       })
     }
+  authorizationComplete = (authState) => {
+    this.setState({auth:authState})
+  }
   render(){
 
         return (
         
         <Router>
-         {!this.state.Auth ? (
+         {!this.state.auth ? (
             <div>
-              <Route path="/signup" component={SignUp} />
-              <Route exact path="/" component={LoginPage} />
+              <Route path="/signup" render={(routeProps) => <SignUp {...routeProps} isAuthorized={this.authorizationComplete}/>}/>
+              <Route  exact path="/" 
+                      render={(routeProps) => <LoginPage {...routeProps} isAuthorized={this.authorizationComplete}/>}/>
             </div>
           ):(
            <div className="TravelDiary">              
@@ -157,7 +162,7 @@ class TravelDiary extends Component {
               <Header/>
               {this.state.loading ? <LoadingSpinner /> : 
                 <Switch>
-                  <Route exact path="/home" render={(routeProps) => <Home {...routeProps} 
+                  <Route exact path="/" render={(routeProps) => <Home {...routeProps} 
                                                                 currentLocation={this.state.currentLocation}/>}/>
                   <Route 
                     path="/route" 

@@ -64,10 +64,7 @@ const NewEntry = (props) => {
         }
         setImages(handlerFileData);
         setImageType(handlerFileData.map(file => file.type));
-        console.log(`handler${handlerFileData}`);
-        console.dir(handlerFileData);
       }
-        console.log(`handler ${handlerFileData}`);
     };
 
     const useStyles = makeStyles({

@@ -45,7 +45,7 @@ export default function LoginPage(props) {
                     <h1>Welcome To Your </h1>
                     <h2>New Travel Diary</h2>
                     <h4>Please Sign Up Below</h4>
-                    <div className={classes.socialLine}>
+                    {/* <div className={classes.socialLine}>
                       <Button
                         justIcon
                         href="#pablo"
@@ -73,7 +73,7 @@ export default function LoginPage(props) {
                       >
                         <i className={"fab fa-google-plus-g"} />
                       </Button>
-                    </div>
+                    </div> */}
                   </CardHeader>
                   {/* <p className={classes.divider}>Or Be Classical</p> */}
                   <CardBody>
@@ -160,7 +160,9 @@ export default function LoginPage(props) {
                     />
                   </CardBody>
                   <CardFooter className={classes.cardFooter}>
-                    <Button simple color="primary" size="lg">
+                    <Button simple color="primary" size="lg"
+                            onClick={() => props.isAuthorized(true)}
+                             >
                       Next
                     </Button>
                     <br/>
