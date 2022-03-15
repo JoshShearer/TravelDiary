@@ -1,0 +1,38 @@
+.btnFacebook { 
+    width: 165px;
+    height:45px !important;  
+    border-radius: 4px;
+    background: #ff7e00 !important;
+    color:white;
+    border:0px transparent;  
+    text-align: left !important;
+    margin:5px;
+    display: inline-block;
+    /* font-weight: bold !important; */
+  }
+  .btnGoogle { 
+    margin:5px;
+    width: 165px;
+    height:45px !important;
+    border-radius: 4px !important;
+    background: #ff7e00 !important;
+    color:white !important;
+    border:0px transparent;
+    text-align-last: center !important;
+    font-family: "Courier New", Courier, monospace !important;
+    font-weight: bold !important;
+  }
+  .btnFacebook:hover {
+    background: #3b5998;
+    opacity: 0.6;
+  }
+  .btnGoogle:hover {
+    background: #db3236;
+    opacity: 0.6;
+  }
+  
+  @media only screen and (max-width : 399px) {
+    .btnFacebook,.btnGoogle{
+      width: 100%
+    }
+  }
