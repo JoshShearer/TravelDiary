@@ -30,7 +30,7 @@ import GoogleIcon from "@mui/icons-material/Google";
 
 // Material Kit 2 React components
 import Box from "../../components/CustomBox";
-// import MKTypography from "components/MKTypography";
+// import Typography from "components/Typography";
 import CustomInput from "../../components/CustomInput/CustomInput";
 import Button from "../../components/CustomButtons/DarkButton";
 // import styles from "../../assets/jss/material-kit-react/views/loginPage.js";
@@ -187,7 +187,7 @@ export default function LoginPage(props) {
   const { ...rest } = props;
   return (
     <div>
-      <Parallax image={require("../../images/Sunrise.jpg")}>
+      <Parallax image={require("../../assets/images/Sunrise.jpg")}>
         <div className={classes.conatiner}>
           <GridContainer justify="center">
             <GridItem xs={12} sm={12} md={6}>

@@ -9,6 +9,11 @@ import "./NewEntry.css";
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
+import { Grid } from '@mui/material';
+import Switch from "@mui/material/Switch";
+import CBox from '../../components/CBox';
+import CInput from '../../components/CInput';
+import Typography from '../../components/Typography';
 // import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
@@ -71,7 +76,7 @@ const NewEntry = (props) => {
 
       return (
         <div className="NewEntry">
-            <h2>Journal Entry</h2>
+            {/* <h2>Journal Entry</h2>
             <Input  type="text" 
                     placeholder="Title" 
                     value={title}
@@ -85,7 +90,22 @@ const NewEntry = (props) => {
                         value={info}
                         onChange={infoHandler}
                         />
-            <br/>
+            <br/> */}
+            <Grid container item justifyContent="center" xs={10} lg={7} mx="auto" textAlign="center">
+            <Typography variant="h3" mb={1}>
+              Journal Entry
+            </Typography>
+           </Grid>
+            <CBox component="form" role="form">
+                  <CBox mb={2}>
+                    <CInput type="email" label="Title" fullWidth />
+                  </CBox>
+                  <CBox mb={2}>
+                    <CInput type="password" label="Share your thoughts..." fullWidth />
+                  </CBox>
+                  <CBox display="flex" alignItems="center" ml={-1}>
+                </CBox>
+                </CBox>
             <sidebar>
               <MapHome   className="mapEntries" 
                               mapSize={mapStyles}  

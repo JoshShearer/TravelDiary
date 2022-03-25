@@ -1,306 +1,145 @@
-import React from "react";
-import { Link } from 'react-router-dom';
-import {makeStyles} from '@mui/styles';
-import InputAdornment from "@mui/material/InputAdornment";
-import Icon from "@mui/material/Icon";
-// @mui/icons-material
-import Email from "@mui/icons-material/Email";
-// core components
-// import Header from "../../../components/Header/Header.js";
-// import HeaderLinks from "../../../components/Header/HeaderLinks.js";
-// import Footer from "../../../components/Footer/Footer.js";
-import GridContainer from "../../components/Grid/GridContainer";
-import GridItem from "../../components/Grid/GridItem";
-import Button from "../../components/CustomButtons/DarkButton";
-// import Card from "../../../components/Card/Card.js";
-// import CardBody from "../../../components/Card/CardBody.js";
-// import CardHeader from "../../../components/Card/CardHeader.js";
-// import CardFooter from "../../../components/Card/CardFooter.js";
+
+import React, { useState } from "react";
+
+// react-router-dom ../../components
+import { Link } from "react-router-dom";
+
+// @mui material ../../components
 import Card from "@mui/material/Card";
 import Switch from "@mui/material/Switch";
 import Grid from "@mui/material/Grid";
 import MuiLink from "@mui/material/Link";
-import CardContent from "@mui/material/CardContent"
 
 // @mui icons
 import FacebookIcon from "@mui/icons-material/Facebook";
 import GitHubIcon from "@mui/icons-material/GitHub";
 import GoogleIcon from "@mui/icons-material/Google";
 
-// Material Kit 2 React components
-import Box from "../../components/CustomBox";
-// import MKTypography from "components/MKTypography";
-import CustomInput from "../../components/CustomInput/CustomInput";
-import Parallax from "../../components/Parallax/Parallax";
-import SocialMediaLogin from '../../components/SocialMediaLogin/SocialMediaLogin'
-import "./LoginPage.css";
+// Material Kit 2 React ../../components
+import CBox from "../../components/CBox";
+import Typography from "../../components/Typography";
+import CInput from "../../components/CInput";
+import CButton from "../../components/CButton";
 
+// Material Kit 2 React example ../../components
+// import DefaultNavbar from "examples/Navbars/DefaultNavbar";
+// import SimpleFooter from "examples/Footers/SimpleFooter";
 
-// import styles from "../../../assets/jss/material-kit-react/views/loginPage.js";
+// Material Kit 2 React page layout routes
+// import routes from "routes";
 
-// import image from "assets/img/bg7.jpg";
-const conatinerFluid = {
-  paddingRight: "15px",
-  paddingLeft: "15px",
-  marginRight: "auto",
-  marginLeft: "auto",
-  width: "100%"
-};
-const conatiner = {
-  ...conatinerFluid, 
-  "@media (min-width: 576px)": {
-    maxWidth: "540px"
-  },
-  "@media (min-width: 768px)": {
-    maxWidth: "720px"
-  },
-  "@media (min-width: 992px)": {
-    maxWidth: "960px"
-  },
-  "@media (min-width: 1200px)": {
-    maxWidth: "1140px"
-  }
-};
+// Images
+import bgImage from "../../assets/images/BeachNight.jpg";
 
-const signupPageStyle = {
-  conatiner: {
-    ...conatiner,
-    zIndex: "2",
-    position: "relative",
-    paddingTop: "20vh",
-    color: "#FFFFFF",
-    paddingBottom: "200px"
-  },
-  cardHidden: {
-    opacity: "0",
-    transform: "translate3d(0, -60px, 0)"
-  },
-  pageHeader: {
-    minHeight: "100vh",
-    height: "auto",
-    display: "inherit",
-    position: "relative",
-    margin: "0",
-    padding: "0",
-    border: "0",
-    alignItems: "center",
-    "&:before": {
-      background: "rgba(0, 0, 0, 0.5)"
-    },
-    "&:before,&:after": {
-      position: "absolute",
-      zIndex: "1",
-      width: "100%",
-      height: "100%",
-      display: "block",
-      left: "0",
-      top: "0",
-      content: '""'
-    },
-    "& footer li a,& footer li a:hover,& footer li a:active": {
-      color: "#FFFFFF"
-    },
-    "& footer": {
-      position: "absolute",
-      bottom: "0",
-      width: "100%"
-    }
-  },
-  form: {
-    margin: "0"
-  },
-  cardHeader: {
-    width: "auto",
-    textAlign: "center",
-    marginLeft: "20px",
-    marginRight: "20px",
-    marginTop: "-40px",
-    padding: "20px 0",
-    marginBottom: "15px"
-  },
-  socialIcons: {
-    maxWidth: "24px",
-    marginTop: "0",
-    width: "100%",
-    transform: "none",
-    left: "0",
-    top: "0",
-    height: "100%",
-    lineHeight: "41px",
-    fontSize: "20px"
-  },
-  divider: {
-    marginTop: "30px",
-    marginBottom: "0px",
-    textAlign: "center"
-  },
-  cardFooter: {
-    paddingTop: "0rem",
-    border: "0",
-    borderRadius: "6px",
-    justifyContent: "center !important"
-  },
-  socialLine: {
-    marginTop: "1rem",
-    textAlign: "center",
-    padding: "0"
-  },
-  inputIconsColor: {
-    color: "#495057"
-  },
-  fbLoginButton: {
-    width: "165px",
-    height:"40px",  
-    borderRadius: "4px",
-    background: "#3b5998",
-    color:"white",
-    border:"0px transparent",  
-    textAlign: "center",
-    margin:"5px",
-    display: "inline-block",
-    "&:hover": {
-      background: "#3b5998",
-      opacity: "0.6"
-    }
-  },
-  googleLoginButton: {
-    width: "165px",
-    height:"40px",  
-    borderRadius: "4px",
-    backgroundColor: "#db3236 !important",
-    color:"white",
-    border:"0px transparent",  
-    textAlign: "center",
-    margin:"5px",
-    display: "inline-block",
-    "&:hover": {
-      background: "#db3236",
-      opacity: "0.6"
-    }
-  }
-};
-const useStyles = makeStyles(signupPageStyle);
+function SignInBasic() {
+  const [rememberMe, setRememberMe] = useState(false);
 
+  const handleSetRememberMe = () => setRememberMe(!rememberMe);
 
-export default function LoginPage(props) {
-  const [cardAnimaton, setCardAnimation] = React.useState("cardHidden");
-
-  setTimeout(function() {
-    setCardAnimation("");
-  }, 700);
-
-  const responseGoogle = (response) => {
-    console.log(response);
-  }
-  const responseFacebook = (response) => {
-    console.log(response);
-  }
-
-  const classes = useStyles();
   return (
-    <div>
-      <Parallax image={require("../../images/Sunrise.jpg")}>
-        <div className={classes.conatiner}>
-          <GridContainer justify="center">
-            <GridItem xs={12} sm={12} md={4}>
-              <Card className={classes[cardAnimaton]}>
-                <form className={classes.form}>
-                  <Box color="orange" className={classes.cardHeader}>
-                    
-                    <h1>Travel Diary</h1>
-                    <h4>Login</h4>
-                    {/* <div className={classes.socialLine}>
-                      <Button
-                        justIcon
-                        href="#pablo"
-                        target="_blank"
-                        color="transparent"
-                        onClick={e => e.preventDefault()}
+    <>
+      <CBox
+        position="absolute"
+        top={0}
+        left={0}
+        zIndex={1}
+        width="100%"
+        minHeight="100vh" 
+        sx={{
+          backgroundImage: ({ functions: { linearGradient, rgba }, palette: { gradients } }) =>
+            `${linearGradient(
+              rgba(gradients.dark.main, 0.6),
+              rgba(gradients.dark.state, 0.6)
+            )}, url(${bgImage})`,
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          backgroundRepeat: "no-repeat",
+        }}
+      />
+      <CBox px={1} width="100%" height="100vh" mx="auto" position="relative" zIndex={2}>
+        <Grid container spacing={1} justifyContent="center" alignItems="center" height="100%">
+          <Grid item xs={11} sm={9} md={5} lg={4} xl={3}>
+            <Card>
+              <CBox
+                variant="gradient"
+                bgColor="primary"
+                borderRadius="lg"
+                coloredShadow="info"
+                mx={2}
+                mt={-3}
+                p={2}
+                mb={1}
+                textAlign="center"
+              >
+                <Typography variant="h4" fontWeight="medium" color="white" mt={1}>
+                  Sign in
+                </Typography>
+                <Grid container spacing={3} justifyContent="center" sx={{ mt: 1, mb: 2 }}>
+                  <Grid item xs={2}>
+                    <Typography component={MuiLink} href="#" variant="body1" color="white">
+                      <FacebookIcon color="inherit" />
+                    </Typography>
+                  </Grid>
+                  <Grid item xs={2}>
+                    <Typography component={MuiLink} href="#" variant="body1" color="white">
+                      <GitHubIcon color="inherit" />
+                    </Typography>
+                  </Grid>
+                  <Grid item xs={2}>
+                    <Typography component={MuiLink} href="#" variant="body1" color="white">
+                      <GoogleIcon color="inherit" />
+                    </Typography>
+                  </Grid>
+                </Grid>
+              </CBox>
+              <CBox pt={4} pb={3} px={3}>
+                <CBox component="form" role="form">
+                  <CBox mb={2}>
+                    <CInput type="email" label="Email" fullWidth />
+                  </CBox>
+                  <CBox mb={2}>
+                    <CInput type="password" label="Password" fullWidth />
+                  </CBox>
+                  <CBox display="flex" alignItems="center" ml={-1}>
+                    <Switch checked={rememberMe} onChange={handleSetRememberMe} />
+                    <Typography
+                      variant="button"
+                      fontWeight="regular"
+                      color="text"
+                      onClick={handleSetRememberMe}
+                      sx={{ cursor: "pointer", userSelect: "none", ml: -1 }}
+                    >
+                      &nbsp;&nbsp;Remember me
+                    </Typography>
+                  </CBox>
+                  <CBox mt={4} mb={1}>
+                    <CButton variant="gradient" color="primary" fullWidth>
+                      sign in
+                    </CButton>
+                  </CBox>
+                  <CBox mt={3} mb={1} textAlign="center">
+                    <Typography variant="button" color="text">
+                      Don&apos;t have an account?{" "}
+                      <Typography
+                        component={Link}
+                        to="/signup"
+                        variant="button"
+                        color="info"
+                        fontWeight="medium"
+                        textGradient
                       >
-                        <i className={"fab fa-twitter"} />
-                      </Button>
-                      <Button
-                        justIcon
-                        href="#pablo"
-                        target="_blank"
-                        color="transparent"
-                        onClick={e => e.preventDefault()}
-                      >
-                        <i className={"fab fa-facebook"} />
-                      </Button>
-                      <Button
-                        justIcon
-                        href="#pablo"
-                        target="_blank"
-                        color="transparent"
-                        onClick={e => e.preventDefault()}
-                      >
-                        <i className={"fab fa-google-plus-g"} />
-                      </Button>
-                    </div> */}
-                  </Box>
-                  {/* <p className={classes.divider}>Or Be Classical</p> */}
-                  <CardContent>
-                    <CustomInput
-                      labelText="Email..."
-                      id="email"
-                      formControlProps={{
-                        fullWidth: true
-                      }}
-                      inputProps={{
-                        type: "email",
-                        endAdornment: (
-                          <InputAdornment position="end">
-                            <Email className={classes.inputIconsColor} />
-                          </InputAdornment>
-                        )
-                      }}
-                    />
-                    <CustomInput
-                      labelText="Password"
-                      id="pass"
-                      formControlProps={{
-                        fullWidth: true
-                      }}
-                      inputProps={{
-                        type: "password",
-                        endAdornment: (
-                          <InputAdornment position="end">
-                            <Icon className={classes.inputIconsColor}>
-                              lock_outline
-                            </Icon>
-                          </InputAdornment>
-                        ),
-                        autoComplete: "off"
-                      }}
-                    />
-                  </CardContent>
-                  <Box className={classes.cardFooter}>
-                    <Button simple color="primary" size="lg"
-                            onClick={() => props.isAuthorized(true)}
-                            component={Link}
-                            to="/"
-                             >
-                      Enter
-                    </Button>
-                  </Box>
-                  <p className={classes.divider}>Don't have an account yet? </p>
-                  <Box className={classes.cardFooter}>
-                  <Button  href="signup" simple color="primary" >
-                    Sign up here
-                  </Button>   
-                  </Box>       
-                  <h6 className="text-center">Or</h6> 
-                  <br/>
-                  <div className="d-flex justify-content-center">
-                    <SocialMediaLogin />
-                  </div>
-                </form>
-              </Card>
-            </GridItem>
-          </GridContainer>
-        </div> 
-      </Parallax>       
-    </div>
-  )
+                        Sign up
+                      </Typography>
+                    </Typography>
+                  </CBox>
+                </CBox>
+              </CBox>
+            </Card>
+          </Grid>
+        </Grid>
+      </CBox>
+    </>
+  );
 }
+
+export default SignInBasic;

@@ -5,7 +5,7 @@ import { useLocation } from '../../containers/TravDiary/LocationContext';
 
 export function CurrentLocation () {
   
-  const [loc, setLoc] = useLocation();
+  const [, setLoc] = useLocation();
 
   useEffect(() => {
   // const getCoordinates = position => {
@@ -32,7 +32,8 @@ export function CurrentLocation () {
 
     if(navigator.geolocation){
       navigator.geolocation.getCurrentPosition((position) => {
-      setLoc({   
+      // console.log("Getting Current Location")
+        setLoc({   
         gps: {lat: position.coords.latitude,
                 lng: position.coords.longitude},
         })})

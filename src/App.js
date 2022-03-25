@@ -1,8 +1,13 @@
 import React, { Component, Fragment } from 'react';
 import TravelDiary from './containers/TravDiary/TravelDiary';
 import { LocationProvider } from './containers/TravDiary/LocationContext';
-import { EntryProvider } from './containers/TravDiary/EntryContext'
+import { EntryProvider } from './containers/TravDiary/EntryContext';
+import { AuthProvider } from './containers/TravDiary/AuthContext';
+import { ThemeProvider } from "@mui/material/styles";
+import CssBaseline from "@mui/material/CssBaseline";
+import theme from "./assets/theme";
 
+// import routes from "routes";
 
 class App extends Component {
   
@@ -10,12 +15,16 @@ class App extends Component {
     
     return (
         <Fragment>
-         {/* {console.log("Loading TravelDiary")} */}
-          <EntryProvider>
-            <LocationProvider>
-                <TravelDiary/>
-            </LocationProvider>
-          </EntryProvider>
+          <ThemeProvider theme={theme}>
+          <CssBaseline/>
+            <AuthProvider>
+              <EntryProvider>
+                <LocationProvider>
+                    <TravelDiary/>
+                </LocationProvider>
+              </EntryProvider>
+            </AuthProvider>
+          </ThemeProvider>
         </Fragment>
       );
   }

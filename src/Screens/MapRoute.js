@@ -13,30 +13,22 @@ function MapRoute() {
     const currentLocation = entryData[Math.round(entryData.length/2)]
 
     useEffect(() => {
-        LoadData();
+        // LoadData();
+        // const EntryUpdate = []
+        // entryData.array.forEach(element => {
+            
+        // });
       },[entryData])
        
       function LoadData() {
       DataHandling([], [entryData,setEntryData], 'Get');
       }
    
-   
-    // const jsonEntry = [];
-    // const markers = (props.data.map((singleEntry) => singleEntry.gps ));
-    // const locations = (props.data.map((singleEntry) => singleEntry.location.city ));
-    // entryData.map((entry) => {
-    //     jsonEntry.push(JSON.stringify(entry))
-    //     console.log(JSON.stringify(entry))
-    // });
-    // // if (!areEqual){
-    // //     setMarkers(props.data.map((singleEntry) => singleEntry.gps ));
-    // //     setLocations(props.data.map((singleEntry) => singleEntry.location.city ));
-    // // }
-    console.log("MapRoute Data",entryData);
-    console.log("MapRoute LData",cLocation)
+    // console.log("MapRoute Data",entryData);
+    // console.log("MapRoute LData",cLocation)
     return (
         <React.Fragment>
-            <div>
+            <div style={{ height: '100vh', width: '100%' }}>
                 {!isEmpty(currentLocation) ?
                 <MapHome  places={entryData} currentLocation={currentLocation.gps}/>
                 : <Spinner/>}
