@@ -1,6 +1,9 @@
 // // if (process.env.NODE_ENV !== 'production'){
 // //     require('dotenv').load()
 // // }
+const path = require("path");
+require('dotenv').config({ path: path.resolve(__dirname, '../../../.env') });
+
 const { MongoClient, ServerApiVersion } = require('mongodb');
 const express = require('express')
 const router = express.Router()
@@ -10,7 +13,6 @@ const cors = require('cors');
 const logger = require("morgan");
 const DiarySchema = require('./diary')
 const imageMimeTypes = ['image/jpeg', 'image/png', 'images/gif']
-const path = require("path");
 
 //initialize http server
 const app = express();
@@ -20,9 +22,7 @@ const API_PORT = process.env.PORT || 5001;
 // const router = express.Router();
 
 //Set up the mongoDB connection
-const dbRoute = 'mongodb+srv://joshshear:6408*_sel@cluster0-7x2dt.mongodb.net/test?retryWrites=true&w=majority';
-
-mongoose.connect(dbRoute, { useNewUrlParser: true,
+mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true,
                             // useFindAndModify: false,
                             // useCreateIndex: true,
                             useUnifiedTopology: true
