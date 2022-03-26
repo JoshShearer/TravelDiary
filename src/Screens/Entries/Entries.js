@@ -5,7 +5,7 @@ import isEmpty from 'lodash.isempty';
 import NoEntriesModal from "../../components/Modal/NoEntriesModal"
 // import dummyEntries from '../../data/populate';
 import { useEntries } from '../../containers/TravDiary/EntryContext';
-import DataHandling from '../../components/DataHandling/DataHandling';
+import { deleteFromDB, getDataFromDb, updateDB } from '../../components/DataHandling/DataHandling';
 
 
 const Transition = forwardRef(function Transition(props, ref) {
@@ -21,17 +21,41 @@ function Entries() {
 
   useEffect(() => {
     LoadData();
-  },[entryData])
+  },[updateEntry,removeEntry])
 
   const removeEntry = (Entry) => {
-    DataHandling(Entry, [entryData,setEntryData], 'Delete')
+    deleteFromDB(Entry.id, entryData)
+    .then((data)=>{
+      console.log("DeleteComplete ", data)
+    })
+    .catch((error)=> {
+      console.log("DeleteFail ", error)
+    })
+    setEntryData([]);
+  }
+
+  const updateEntry = (Entry) => {
+    updateDB(Entry, entryData)
+    .then((data)=>{
+      console.log("Update Complete ", data)
+    })
+    .catch((error)=> {
+      console.log("UpdateFail ", error)
+    })
+    setEntryData([]);
   }
 
   function LoadData() {
-  DataHandling([], [entryData,setEntryData], 'Get');
+    const Data = getDataFromDb()
+    .then((data)=>{
+      console.log("async Data Get Entries", data)
+      if(JSON.stringify(entryData) !== JSON.stringify(data)){
+        setEntryData(data);
+    }})
+    .catch((error=> {
+      console.log("DataHandling Error Entries" ,error.message)
+    }))
   }
-
-  // const dEntries = dummyEntries();
 
   return (
     <div>
@@ -41,6 +65,7 @@ function Entries() {
               data={singleEntry}
               key={key}
               remove={removeEntry}
+              update={updateEntry}
             />
           ))
         ) : (

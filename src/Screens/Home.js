@@ -13,9 +13,6 @@ const Wrapper = styled.main`
     margin: 5px 5px;
     filter: drop-shadow(-1px 5px 3px #ccc);
     border-width: 3px;
-    ${'' /* border-style: solid;
-    border-color: #ff8040;
-    border-radius: 5px; */}
   }
   .info-wrapper {
     margin-top: 15px;
@@ -36,14 +33,14 @@ const Wrapper = styled.main`
 
 export default function Home () {
 
-        const [, updateLocation] = useLocation();
+        const [, ,setLocation] = useLocation();
                 
 
         return (
             
             <Wrapper>
                 <div className="main-wrapper">
-                    <MyGoogleMap locationUpdate={updateLocation}/>
+                    <MyGoogleMap locationUpdate={setLocation}/>
                 </div>
             </Wrapper>            
         );

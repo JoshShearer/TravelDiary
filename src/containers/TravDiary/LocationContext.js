@@ -21,11 +21,15 @@ export function LocationProvider({ children }) {
 
     function updateLocation(nLocation){
         setLoc(nLocation)
-        console.log("set Location", nLocation)
+        console.log("set Location", nLocation)        
+    }
+    function setLocation(nLocation){
+        setLoc(nLocation)
+        localStorage.setItem('locationData', JSON.stringify(nLocation))
     }
     
     return (
-        <LocationContext.Provider value={[loc, updateLocation]}>
+        <LocationContext.Provider value={[loc, updateLocation, setLocation]}>
             {children}
         </LocationContext.Provider>
     )

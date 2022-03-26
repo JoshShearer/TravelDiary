@@ -30,7 +30,7 @@ export default function LightButton(props) {
                     <Button
                         color= "secondary"
                         variant="outlined"
-                        
+                        onClick = {props.click}
                     >
                     {props.buttonText}
                     </Button>

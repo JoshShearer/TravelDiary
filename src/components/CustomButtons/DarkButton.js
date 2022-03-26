@@ -15,6 +15,7 @@ const theme = createTheme(adaptV4Theme({
         main: '#e3f2fd',
       },
     },
+
   }));
 
 
@@ -27,10 +28,10 @@ export default function DarkButton(props) {
             <StyledEngineProvider injectFirst>
                 <ThemeProvider theme={theme}>
                   <Link to={props.page} style={{ textDecoration: 'none' }}>
-                    <Button
+                    <Button 
                         color= "primary"
                         variant="outlined"
-                        sx={{mx: '50%'}}  
+                        sx={{mx: '40%'}}  
                         onClick={props.click}                
                     >
                     {props.buttonText}

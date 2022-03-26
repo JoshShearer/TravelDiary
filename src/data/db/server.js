@@ -87,14 +87,26 @@ router.post('/putData', async (req, res) => {
 })
 
 //Delete Entire Entry
- router.delete('/deleteData', (req, res) => {
-        const id = req.body.id;
-        
-        DiarySchema.findByIdAndDelete(id, err => {
-            if (err) return res.send(err);
-            return res.json({ success: true });
-        });
-    });
+router.delete('/deleteData', (req, res) => {
+      const id = req.body.id;
+      
+      DiarySchema.findByIdAndDelete(id, err => {
+          if (err) return res.send(err);
+          return res.json({ success: true });
+      });
+  });
+
+//Update Entry
+router.post('/updateData', async (req, res) => {
+  const id = req.body.id;
+  
+  const update = req.body.update;
+
+  DiarySchema.findByIdAndUpdate(id, update, {new:true}, err => {
+      if (err) return res.send(err);
+      return res.json({ success: true });
+  });
+});
 
 async function renderNewEntry(res, diarySchema, hasError = false) {
   try {

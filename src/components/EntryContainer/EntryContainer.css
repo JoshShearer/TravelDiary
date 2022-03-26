@@ -31,7 +31,10 @@ header {
   article {
     float: left;
     padding: 20px;
-    width: 70%;
+    width: 45%;
+    background: #ccc;
+    padding: 20px;
+    border-radius: 8px;
     /* background-color: papayawhip; */
     height: 300px; /* only for demonstration, should be removed */
   }
