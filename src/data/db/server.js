@@ -22,11 +22,12 @@ const API_PORT = process.env.PORT || 5001;
 // const router = express.Router();
 
 //Set up the mongoDB connection
-mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true,
+mongoose.connect(process.env.MONGODB_URI, { 
+  useNewUrlParser: true,
                             // useFindAndModify: false,
                             // useCreateIndex: true,
-                            useUnifiedTopology: true
-                            });
+  useUnifiedTopology: true
+});
 
 let db = mongoose.connection;
 

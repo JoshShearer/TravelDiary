@@ -3,6 +3,7 @@ import { useEntries } from '../containers/TravDiary/EntryContext';
 import { useLocation } from '../containers/TravDiary/LocationContext';
 import MapHome from "./../components/MapContainer/RouteMap";
 import Spinner from '../components/Spinner/LoadingSpinner';
+import NoEntriesModal from '../components/Modal/NoEntriesModal';
 import isEmpty from 'lodash.isempty';
 
 function MapRoute() {
@@ -16,7 +17,7 @@ function MapRoute() {
             <div style={{ height: '97vh', width: '100%' }}>
                 {!isEmpty(currentLocation) ?
                 <MapHome  places={entryData} currentLocation={currentLocation.gps}/>
-                : <Spinner/>}
+                : <NoEntriesModal/>}
             </div>
         </React.Fragment>  
     );
