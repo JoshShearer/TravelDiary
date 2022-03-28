@@ -43,9 +43,9 @@ app.use(logger("dev"));
 
 if(process.env.NODE_ENV === 'production'){
   //set the static folder
-  app.use(express.static('TRAVEL-DIARY/build'));
+  app.use(express.static('traveldiary/build'));
   app.get('*', (req, res) => {
-    res.sendFile(path.resolve(__dirname, 'TRAVEL-DIARY', 'build', 'index.html'));
+    res.sendFile(path.resolve(__dirname, 'traveldiary', 'build', 'index.html'));
   });
 }
 
@@ -68,8 +68,7 @@ router.post('/putData', async (req, res) => {
     id: req.body.id,
     title: req.body.title,
     info: req.body.info,
-    images: req.body.images,
-    imageTypes: req.body.imageType,
+    image: req.body.image,
     date: req.body.date,
     time: req.body.time,
     gps: req.body.gps,
@@ -120,26 +119,16 @@ async function renderNewEntry(res, diarySchema, hasError = false) {
   }
 }
 
-function saveImage (DiarySchema, imagesEncoded) {
-  if (imagesEncoded == null) return
+// function saveImage (DiarySchema, imagesEncoded) {
+//   if (imagesEncoded == null) return
 
-  imagesEncoded.map((imageEncoded, index) => {
-    const image = JSON.parse(imageEncoded);
-    if (image != null && imageMimeTypes.includes(image.type)) {
-      DiarySchema.image[index] = new Buffer.from(image.data, 'base64');
-      DiarySchema.imageType[index] = image.type;
-  }})}
+//   imagesEncoded.map((imageEncoded, index) => {
+//     const image = JSON.parse(imageEncoded);
+//     if (image != null && imageMimeTypes.includes(image.type)) {
+//       DiarySchema.image[index] = new Buffer.from(image.data, 'base64');
+//       DiarySchema.imageType[index] = image.type;
+//   }})}
 
-  // if (process.env.NODE_ENV === 'production') {
-  //   // Serve any static files
-  //   app.use(express.static(path.join(__dirname, 'client/build')));
-      
-  //   // Handle React routing, return all requests to React app
-  //   app.get('*', function(req, res) {
-  //     res.sendFile(path.join(__dirname, 'client/build', 'index.html'));
-  //   });
-  // }
-//append /api for our http requests
 app.use('/api', router);
 
 //launch our backend into a port

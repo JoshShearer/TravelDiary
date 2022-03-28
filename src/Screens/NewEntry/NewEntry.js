@@ -51,7 +51,6 @@ export default function NewEntry () {
   const [title, setTitle] = useState("");
   const [info, setInfo] = useState("");
   const [images, setImages] = useState([]);
-  const [imageType, setImageType] = useState([]);
 
   const [loc, setLoc,] = useLocation();
   const [entryData, setEntryData] = useEntries();
@@ -100,20 +99,20 @@ export default function NewEntry () {
     }
   }
 
-  const myCallBack = (handlerFileData) => {
-    if (handlerFileData !== undefined && handlerFileData.length > 1) {
-      if (handlerFileData[handlerFileData.length - 1].name === undefined) {
-        handlerFileData.pop();
+  const photoCallBack = (imageFileData) => {
+    if (imageFileData !== undefined && imageFileData.length > 0) {
+      if (imageFileData[imageFileData.length - 1].name === undefined) {
+        imageFileData.pop();
       }
-      setImages(handlerFileData);
-      setImageType(handlerFileData.map((file) => file.type));
+      setImages(imageFileData);
     }
   };
+  
   const dataEntry = (newData) => {
     putDataToDB(newData, [entryData, setEntryData])
     .then(success => console.log(success)
     .catch(err => console.log(err)));
-    // setEntryData([])
+    setEntryData([])
   };
 
   return (
@@ -239,7 +238,7 @@ export default function NewEntry () {
                       <ImageHandler
                         className="filepond--item"
                         preview={false}
-                        parentFileCallback={myCallBack}
+                        parentFileCallback={photoCallBack}
                       />
                     </Grid>
                     <br />
@@ -249,8 +248,7 @@ export default function NewEntry () {
                           dataEntry({
                             title: title,
                             info: info,
-                            images: images,
-                            imageType: imageType,
+                            images: images.file,
                             date:
                               findDate.getMonth() +
                               1 +
@@ -282,5 +280,3 @@ export default function NewEntry () {
     </>
   );
 };
-
-// export default NewEntry;

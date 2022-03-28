@@ -53,7 +53,7 @@ function Entries() {
         setEntryData(data);
     }})
     .catch((error=> {
-      console.log("DataHandling Error Entries" ,error.message)
+      console.log("DataHandling Error Entries", error.message)
     }))
   }
 

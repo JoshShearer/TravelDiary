@@ -1,7 +1,6 @@
 import React, { useEffect, useCallback } from 'react';
 
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import { createBrowserHistory } from "history";
+import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
 
 import NewEntry from "../../Screens/NewEntry/NewEntry";
 import MapRoute from "../../Screens/MapRoute";
@@ -15,7 +14,7 @@ import { getDataFromDb } from '../../components/DataHandling/DataHandling';
 
 
 export default function TravelDiary () {
-  var hist = createBrowserHistory();
+  // var nav = useNavigate();
   const[entryData, setEntryData] = useEntries();
   const[auth, setAuth] = useAuth();
   const[loc, ] = useLocation();
@@ -29,7 +28,7 @@ export default function TravelDiary () {
             setEntryData(data);
         }})
         .catch((error=> {
-          console.log("DataHandling Error " ,error.message)
+          console.log("DataHandling Error ", error.message)
         }))
       
       
@@ -41,23 +40,25 @@ export default function TravelDiary () {
   
   return (
         
-        <Router history={hist}>
+        <Router >
          {/* {!auth.verified ? (
             <Routes> 
               <Route path="/signup" element={ <SignUp />}/> 
               <Route  path="/" exact element={ <LoginPage />}/>
             </Routes>
           ):( */}
-           <div className="TravelDiary">              
-               
-                  {/* {loc && 'location' in loc ?  */}
+           <div className="TravelDiary">
+                  {loc && 'location' in loc ?
                   <Routes>
-                  <Route path="/route" element={ <MapRoute />}/>
-                  <Route path="/newEntry" element={ <NewEntry />}/>        
-                  <Route path="/entries" element={ <Entries />}/>
-                  <Route exact path="/" element={ <Home />}/>
-                  <Route exact path="/" element={ <Home />}/>
-                  </Routes>             
+                    <Route path="/route" element={ <MapRoute />}/>
+                    <Route path="/newEntry" element={ <NewEntry />}/>        
+                    <Route path="/entries" element={ <Entries />}/>
+                    <Route exact path="/" element={ <Home />}/>
+                  </Routes> :
+                  <Routes>                    
+                    <Route exact path="/" element={ <Home />}/>
+                    <Route path="*" element={<Navigate to="/" />} />
+                  </Routes> }
               <Footer/>
           </div>
           {/* )} */}

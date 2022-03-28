@@ -1,23 +1,25 @@
-const mongoose = require ('mongoose');
+const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
-
 //Define data schema
-const diarySchema = new Schema({
-    
+const diarySchema = new Schema(
+  {
     id: Number,
     title: String,
     info: String,
-    images: {binData: 'Buffer'},  
-    imageTypes: {type: String},  
+    image: {
+        id: String,
+        name: String,
+        type: String, 
+        img: {       
+        data: Buffer,
+        imgType: String,
+        },
+    },
     date: String,
     time: String,
-    gps: {  lat: Number,
-            lng: Number},
-    location: { address: String,
-                city: String,
-                state: String,
-                country: String}
+    gps: { lat: Number, lng: Number },
+    location: { address: String, city: String, state: String, country: String },
   },
   { timestamps: true },
   { strict: false }
@@ -32,10 +34,10 @@ const diarySchema = new Schema({
 //       stringArray[index] = `data:${this.imageTypes[index]};charset=utf-8;base64,${this.images[index].toString('base64')}`
 //       console.dir(`schema ${stringArray[index]}`)
 //       }
-    
+
 //       return stringArray;
 //   }
 // })
 
 //Export the Mongoose Model
-module.exports = mongoose.model('DiarySchema', diarySchema);
+module.exports = mongoose.model("DiarySchema", diarySchema);

@@ -16,7 +16,7 @@ const getInfoWindowString = (place) => `
       <div style="font-size: 14px;">       
         ${place.info}
       </div>
-      <div style="font-size: 14px; color: grey;">
+      <div style="font-size: 14px; color: grey;font-weight: bold;">
         ${place.location.address}
       </div>
     </div>
