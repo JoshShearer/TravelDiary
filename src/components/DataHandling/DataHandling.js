@@ -7,7 +7,7 @@ axios.defaults.baseURL = "https://react-traveldiary.web.app/";
 export async function getDataFromDb() { return new Promise((resolve,reject) => {
 
     axios
-      .get("http://localhost:5001/api/getData")
+      .get("http://localhost:process.env.PORT/api/getData")
       .then(res => {
         const data = [...res.data.data]
           if(data){return resolve(data)}else{return reject("error getting data")}
@@ -39,7 +39,7 @@ export async function putDataToDB(itemToUpdate, dbEntryData) { return new Promis
 
   console.log("new Entry",newEntry)
   axios
-    .post("http://localhost:5001/api/putData", newEntry)
+    .post("http://localhost:process.env.PORT/api/putData", newEntry)
     .then(res =>( console.log("new Data success", res), resolve(res)))
     .catch(err => (console.log("itemToUpdateError", err), reject(err)));
   })
@@ -55,7 +55,7 @@ export async function deleteFromDB(idToDelete, dbEntryData) {  return new Promis
     }
   });
   try{
-  axios.delete("http://localhost:5001/api/deleteData", { 
+  axios.delete("http://localhost:process.env.PORT/api/deleteData", { 
     data: {
       id: objectToDelete
     }
@@ -73,7 +73,7 @@ export async function updateDB(itemToUpdate, entryData) { return new Promise((re
     }
   });
   try{
-  axios.post("http://localhost:5001/api/updateData", {
+  axios.post("http://localhost:process.env.PORT/api/updateData", {
     id: objItemToUpdate,
     update: { title: itemToUpdate.title,
               info: itemToUpdate.info,

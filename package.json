@@ -45,7 +45,7 @@
     "client": "react-scripts start",
     "install-client": "npm run build",
     "server": "node src/data/db/server.js",
-    "heroku-postbuild":"npm run install-client && npm install",
+    "heroku-postbuild":"cd traveldiary && npm run install-client && npm install",
     "build": "react-scripts build",
     "test": "react-scripts test && echo \"Error: no test specified\" && exit 1",
     "dev": "concurrently \"npm run server\" \"npm run client\"",
