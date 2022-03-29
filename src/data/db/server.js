@@ -18,6 +18,7 @@ const imageMimeTypes = ['image/jpeg', 'image/png', 'images/gif']
 const app = express();
 app.use(cors());
 // app.options("*", cors());
+console.log("NODE_ENV ", process.env.NODE_ENV)
 const API_PORT = process.env.PORT || 5001;
 const MONGODB_URI = process.env.MONGODB_URI;
 console.log("Active Port ", API_PORT);
