@@ -11,6 +11,7 @@ const configs = {
   },
 };
 const config = configs[process.env.NODE_ENV]
+console.log("Heroku_URI ", process.env.HEROKU_URI)
 console.log("config URL ", config.SERVER_URI);
 
 // const API_PORT = process.env.PORT || 5001

@@ -2,7 +2,7 @@
   "name": "traveldiary",
   "version": "0.1.0",
   "private": true,
-  "main": "index.js",
+  "main": "index.js && src/data/db/server.js",
   "dependencies": {
     "@emotion/react": "^11.8.2",
     "@emotion/styled": "^11.8.1",
