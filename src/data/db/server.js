@@ -44,9 +44,9 @@ app.use(logger("dev"));
 
 if(process.env.NODE_ENV === 'production'){
   //set the static folder
-  app.use(express.static('build'));
+  app.use(express.static('traveldiary/build'));
   app.get('*', (req, res) => {
-    res.sendFile(path.resolve(__dirname, 'build', 'index.html'));
+    res.sendFile(path.resolve(__dirname, 'traveldiary/build', 'index.html'));
   });
 }
 
