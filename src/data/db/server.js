@@ -2,7 +2,7 @@
 // //     require('dotenv').load()
 // // }
 const path = require("path");
-require('dotenv').config({ path: path.resolve(__dirname, '../../../.env') });
+// require('dotenv').config({ path: path.resolve(__dirname, '../../../.env') });
 
 const { MongoClient, ServerApiVersion } = require('mongodb');
 const express = require('express')
@@ -19,8 +19,9 @@ const app = express();
 app.use(cors());
 // app.options("*", cors());
 const API_PORT = process.env.PORT || 5001;
+console.log("Active Port ", API_PORT);
 // const router = express.Router();
-
+console.log("MongoURI ", MONGODB_URI);
 //Set up the mongoDB connection
 mongoose.connect(process.env.MONGODB_URI, { 
   useNewUrlParser: true,

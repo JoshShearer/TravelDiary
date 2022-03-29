@@ -71,8 +71,8 @@ export default class ImageHandler extends Component {
     const formData = new FormData();
     this.props.parentFileCallback(this.state.files)
     this.setState({fileUploaded:true})
-    const file = this.pond.getFiles().map(fileItem => fileItem.file).foreach(file => {formData.append(file, file.name)});
-    console.log(file)
+    // const file = this.pond.getFiles().map(fileItem => fileItem.file).foreach(file => {formData.append(file, file.name)});
+    // console.log(file)
   }
 
   
