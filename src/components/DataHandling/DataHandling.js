@@ -1,7 +1,7 @@
 
 import axios from 'axios';
 
-axios.defaults.baseURL = "https://react-traveldiary.web.app/";
+axios.defaults.baseURL = "https://react-travel-diary.herokuapp.com/";
 const configs = {
   development: {
     SERVER_URI: 'http://localhost:5001',
