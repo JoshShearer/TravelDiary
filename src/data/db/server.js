@@ -1,6 +1,6 @@
-// // if (process.env.NODE_ENV !== 'production'){
-// //     require('dotenv').load()
-// // }
+if (process.env.NODE_ENV !== 'production'){
+    require('dotenv').load()
+}
 const path = require("path");
 // require('dotenv').config({ path: path.resolve(__dirname, '../../../.env') });
 
@@ -19,6 +19,7 @@ const app = express();
 app.use(cors());
 // app.options("*", cors());
 const API_PORT = process.env.PORT || 5001;
+const MONGODB_URI = process.env.MONGODB_URI;
 console.log("Active Port ", API_PORT);
 // const router = express.Router();
 console.log("MongoURI ", MONGODB_URI);
