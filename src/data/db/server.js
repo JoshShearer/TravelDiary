@@ -75,7 +75,7 @@ router.post('/putData', async (req, res) => {
     gps: req.body.gps,
     location: req.body.location
   })
-  saveImage (diarySchema, req.body.images)
+  // saveImage (diarySchema, req.body.images)
 
   try {
     const newEntry = await diarySchema.save()
@@ -130,12 +130,17 @@ async function renderNewEntry(res, diarySchema, hasError = false) {
 //       DiarySchema.imageType[index] = image.type;
 //   }})}
 
+
 app.use('/api', router);
 
 //launch our backend into a port
-app.listen(API_PORT, () => console.log(`LISTENING ON PORT ${API_PORT}`));
+app.listen(API_PORT, (err) => {
+  if(err) return console.log("Listen Error ", err);
+  
+  console.log(`LISTENING ON PORT ${API_PORT}`)});
 
 module.exports = router
+
 
 
 
