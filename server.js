@@ -3,8 +3,6 @@ if (process.env.NODE_ENV !== 'production'){
     require('dotenv').config({ path: path.resolve(__dirname, '.env') });
 }
 
-// require('dotenv').config({ path: path.resolve(__dirname, '../../../.env') });
-
 const { MongoClient, ServerApiVersion } = require('mongodb');
 const express = require('express')
 const router = express.Router()
@@ -18,18 +16,15 @@ const imageMimeTypes = ['image/jpeg', 'image/png', 'images/gif']
 //initialize http server
 const app = express();
 app.use(cors());
-// app.options("*", cors());
+
 console.log("NODE_ENV ", process.env.NODE_ENV)
 const API_PORT = process.env.PORT || 5001;
 const MONGODB_URI = process.env.MONGODB_URI;
 console.log("Active Port ", API_PORT);
-// const router = express.Router();
 console.log("MongoURI ", MONGODB_URI);
 //Set up the mongoDB connection
 mongoose.connect(process.env.MONGODB_URI, { 
   useNewUrlParser: true,
-                            // useFindAndModify: false,
-                            // useCreateIndex: true,
   useUnifiedTopology: true
 });
 

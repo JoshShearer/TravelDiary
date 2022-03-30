@@ -16,15 +16,15 @@ console.log("config URL ", config.SERVER_URI);
 
 // const API_PORT = process.env.PORT || 5001
 export async function getDataFromDb() { return new Promise((resolve,reject) => {
-  console.log(`.get ,${config.SERVER_URI}/api/getData`)
+  console.log(`.get ${config.SERVER_URI}/api/getData`)
 
     axios
       .get(`${config.SERVER_URI}/api/getData`)
       .then(res => {
         const data = [...res.data.data]
+        console.log("response Data ", res )
+        console.log("get data ", data)
           if(data){return resolve(data)}else{return reject("error getting data")}
-                  
-        console.log("Get Data", [...res.data.data]);
       })
       .catch(err => {console.log("axios error", err); return reject(err);});
   // }
