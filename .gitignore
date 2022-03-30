@@ -10,7 +10,7 @@
 /coverage
 
 # production
-client/build
+# client/build
 client/public
 client/node_modules
 client/package-lock.json
