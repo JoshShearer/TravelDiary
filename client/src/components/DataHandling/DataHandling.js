@@ -7,7 +7,7 @@ const configs = {
     SERVER_URI: 'http://localhost:5001',
   },
   production: {
-    SERVER_URI: process.env.HEROKU_URI,
+    SERVER_URI: 'https://react-travel-diary.herokuapp.com',
   },
 };
 const config = configs[process.env.NODE_ENV]
