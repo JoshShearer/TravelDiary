@@ -23,7 +23,7 @@ export async function getDataFromDb() { return new Promise((resolve,reject) => {
         const data = [...res.data.data]
           if(data){return resolve(data)}else{return reject("error getting data")}
                   
-        console.log("Get Data", [...res.data.data]);
+        // console.log("Get Data", [...res.data.data]);
       })
       .catch(err => {console.log("axios error", err); return reject(err);});
   // }
