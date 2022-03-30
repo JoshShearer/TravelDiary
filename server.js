@@ -18,7 +18,7 @@ const app = express();
 app.use(cors());
 
 console.log("NODE_ENV ", process.env.NODE_ENV)
-const API_PORT = process.env.PORT || 5001;
+const API_PORT = process.env.PORT || 5000;
 const MONGODB_URI = process.env.MONGODB_URI;
 console.log("Active Port ", API_PORT);
 console.log("MongoURI ", MONGODB_URI);
