@@ -10,7 +10,11 @@
 /coverage
 
 # production
-/build
+client/build
+client/public
+client/node_modules
+client/package-lock.json
+client/.env
 
 # misc
 .DS_Store
@@ -21,10 +25,9 @@
 
 npm-debug.log*
 yarn-debug.log*
-yarn-error.log*
+
 .env
-.env
+
 .vscode/launch.json
 package-lock.json
-package-lock.json
-package-lock.json
+

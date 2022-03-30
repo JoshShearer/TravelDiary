@@ -1,77 +1,29 @@
 {
-  "name": "traveldiary",
+  "name": "traveldiarybackend",
   "version": "0.1.0",
   "private": true,
-  "main": "index.js && src/data/db/server.js",
+  "main": "server.js",
   "dependencies": {
-    "@emotion/react": "^11.8.2",
-    "@emotion/styled": "^11.8.1",
-    "@mui/icons-material": "^5.5.0",
-    "@mui/material": "^5.5.0",
-    "@mui/styles": "^5.5.0",
-    "@testing-library/jest-dom": "^5.14.1",
-    "@testing-library/react": "^12.0.0",
-    "@testing-library/user-event": "^13.2.1",
-    "axios": "^0.26.1",
-    "chroma-js": "^2.4.2",
-    "classnames": "^2.3.1",
-    "concurrently": "^7.0.0",
-    "cors": "^2.8.5",
-    "dotenv": "^16.0.0",
-    "express": "^4.17.3",
-    "filepond": "^4.30.3",
-    "filepond-plugin-file-encode": "^2.1.10",
-    "filepond-plugin-image-exif-orientation": "^1.0.11",
-    "filepond-plugin-image-preview": "^4.6.10",
-    "filepond-plugin-image-resize": "^2.0.10",
-    "filepond-plugin-image-transform": "^3.8.7",
-    "google-map-react": "^2.1.10",
-    "lodash.isempty": "^4.4.0",
-    "lodash.throttle": "^4.1.1",
     "mongodb": "^4.4.1",
     "mongoose": "^6.2.6",
     "morgan": "^1.10.0",
-    "prop-types": "^15.8.1",
-    "react": "^17.0.2",
-    "react-dom": "^17.0.2",
-    "react-filepond": "^7.1.1",
-    "react-google-login": "^5.2.2",
-    "react-router-dom": "^6.2.2",
-    "react-scripts": "^2.1.3",
-    "styled-components": "^5.3.3",
-    "web-vitals": "^2.1.0"
+    "express": "^4.17.3",
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.0",
+    "concurrently": "^7.0.0"
+    
   },
   "scripts": {
-    "start": "npm run dev",
-    "client": "react-scripts start",
-    "install-client": "npm run build",
-    "server": "node src/data/db/server.js",
-    "heroku-postbuild":"npm run install-client && npm install",
-    "build": "react-scripts build",
-    "test": "react-scripts test && echo \"Error: no test specified\" && exit 1",
-    "dev": "concurrently \"npm run server\" \"npm run client\"",
-    "eject": "react-scripts eject"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "cd client && npm run build",
+    "install-client": "cd client && npm install",
+    "heroku-postbuild": "npm run install-client && npm run build",
+    "start": "node server.js",
+    "client": "cd client && npm start",
+    "dev": "concurrently -n 'server,client' -c 'red,green'  \"nodemon server.js\" \"npm run client\""
   },
   "engines": {
     "npm": "8.3.1",
     "node": "16.14.0"
-  },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
-  },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
   }
 }
