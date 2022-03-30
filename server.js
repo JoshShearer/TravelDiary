@@ -12,7 +12,7 @@ const mongoose = require ('mongoose');
 const bodyParser  = require ('body-parser');
 const cors = require('cors');
 const logger = require("morgan");
-const DiarySchema = require('./src/data/diary')
+const DiarySchema = require('./data/diary')
 const imageMimeTypes = ['image/jpeg', 'image/png', 'images/gif']
 
 //initialize http server
@@ -48,9 +48,9 @@ app.use(logger("dev"));
 
 if(process.env.NODE_ENV === 'production'){
   //set the static folder
-  app.use(express.static('traveldiary/build'));
+  app.use(express.static('client/build'));
   app.get('*', (req, res) => {
-    res.sendFile(path.resolve(__dirname, 'traveldiary/build', 'index.html'));
+    res.sendFile(path.resolve(__dirname, 'client/build', 'index.html'));
   });
 }
 
