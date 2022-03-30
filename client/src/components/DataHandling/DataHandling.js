@@ -1,18 +1,18 @@
 
 import axios from 'axios';
 
-// axios.defaults.baseURL = "https://react-travel-diary.herokuapp.com/";
-const configs = {
-  development: {
-    SERVER_URI: 'http://localhost:5001',
-  },
-  production: {
-    SERVER_URI: process.env.HEROKU_URI,
-  },
-};
-const config = configs[process.env.NODE_ENV]
-console.log("Heroku_URI ", process.env.HEROKU_URI)
-console.log("config URL ", config.SERVER_URI);
+axios.defaults.baseURL = "https://react-travel-diary.herokuapp.com/";
+// const configs = {
+//   development: {
+//     SERVER_URI: 'http://localhost:5001',
+//   },
+//   production: {
+//     SERVER_URI: process.env.HEROKU_URI,
+//   },
+// };
+// const config = configs[process.env.NODE_ENV]
+// console.log("Heroku_URI ", process.env.HEROKU_URI)
+// console.log("config URL ", config.SERVER_URI);
 
 // const API_PORT = process.env.PORT || 5001
 export async function getDataFromDb() { return new Promise((resolve,reject) => {
