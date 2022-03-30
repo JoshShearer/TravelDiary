@@ -1,24 +1,30 @@
 
 import axios from 'axios';
 
-// axios.defaults.baseURL = "https://react-travel-diary.herokuapp.com/";
-const configs = {
-  development: {
-    SERVER_URI: 'http://localhost:5001',
-  },
-  production: {
-    SERVER_URI: 'https://react-travel-diary.herokuapp.com',
-  },
-};
-const config = configs[process.env.NODE_ENV]
-console.log("Heroku_URI ", process.env.HEROKU_URI)
-console.log("config URL ", config.SERVER_URI);
-
+if(process.env.NODE_ENV === 'production'){
+  axios.defaults.baseURL = "https://react-travel-diary.herokuapp.com";
+}else{
+  axios.defaults.baseURL = 'http://localhost:5001';
+}
+// axios.defaults.baseURL = "https://react-travel-diary.herokuapp.com";
+// const configs = {
+//   development: {
+//     SERVER_URI: 'http://localhost:5001',
+//   },
+//   production: {
+//     SERVER_URI: 'https://react-travel-diary.herokuapp.com',
+//   },
+// };
+// const config = configs[process.env.NODE_ENV]
+// console.log("Heroku_URI ", process.env.HEROKU_URI)
+// console.log("config URL ", config.SERVER_URI);
+// console.log(`.Get => ${config.SERVER_URI}/api/getData`)
+console.log("base ", axios.defaults.base)
 // const API_PORT = process.env.PORT || 5001
 export async function getDataFromDb() { return new Promise((resolve,reject) => {
 
     axios
-      .get(`${config.SERVER_URI}/api/getData`)
+      .get('/api/getData')
       .then(res => {
         const data = [...res.data.data]
           if(data){return resolve(data)}else{return reject("error getting data")}
@@ -50,7 +56,7 @@ export async function putDataToDB(itemToUpdate, dbEntryData) { return new Promis
 
   console.log("new Entry",newEntry)
   axios
-    .post(`${config.SERVER_URI}/api/putData`, newEntry)
+    .post('/api/putData', newEntry)
     .then(res =>( console.log("new Data success", res), resolve(res)))
     .catch(err => (console.log("itemToUpdateError", err), reject(err)));
   })
@@ -66,7 +72,7 @@ export async function deleteFromDB(idToDelete, dbEntryData) {  return new Promis
     }
   });
   try{
-  axios.delete(`${config.SERVER_URI}/api/deleteData`, { 
+  axios.delete('/api/deleteData', { 
     data: {
       id: objectToDelete
     }
@@ -84,7 +90,7 @@ export async function updateDB(itemToUpdate, entryData) { return new Promise((re
     }
   });
   try{
-  axios.post(`${config.SERVER_URI}/api/updateData`, {
+  axios.post('/api/updateData', {
     id: objItemToUpdate,
     update: { title: itemToUpdate.title,
               info: itemToUpdate.info,
