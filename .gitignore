@@ -11,7 +11,7 @@
 
 # production
 # client/build
-client/public
+# client/public
 client/node_modules
 client/package-lock.json
 client/.env
