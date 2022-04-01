@@ -109,9 +109,9 @@ export default function NewEntry () {
   };
   
   const dataEntry = (newData) => {
-    putDataToDB(newData, [entryData, setEntryData])
-    .then(success => console.log(success)
-    .catch(err => console.log(err)));
+    putDataToDB(newData, entryData)
+    .then(success => console.log(success))
+    .catch(err => console.log(err));
     setEntryData([])
   };
 
