@@ -10,7 +10,9 @@ const configs = {
     SERVER_URI: 'https://react-travel-diary.herokuapp.com',
   },
 };
-const config = configs[process.env.NODE_ENV]
+
+console.log("NODE_ENV DH ", process.env.REACT_APP_NODE_ENV)
+const config = configs[process.env.REACT_APP_NODE_ENV]
 console.log("Heroku_URI ", process.env.HEROKU_URI)
 console.log("config URL ", config.SERVER_URI);
 
@@ -32,6 +34,7 @@ export async function getDataFromDb() { return new Promise((resolve,reject) => {
 
 
 export async function putDataToDB(itemToUpdate, dbEntryData) { return new Promise((resolve, reject) => {
+  console.log("entryData " ,dbEntryData)
   let currentIds = dbEntryData.map(data => data.id);
   let idToBeAdded = 0;
   while (currentIds.includes(idToBeAdded)) {

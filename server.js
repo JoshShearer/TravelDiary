@@ -35,6 +35,11 @@ db.once('open',() => {console.log('connected to the database'); })
 //checks if the connection with the database is successful
 db.on('error', console.error.bind(console, 'MongoDB connection error'));
 
+app.use((req, res, next) => {
+  console.log(`${req.method} - ${req.url}`);
+  next()
+})
+
 // (optional) only made for logging and
 // bodyParser, parses the request body to be a readable json format
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -44,8 +49,9 @@ app.use(logger("dev"));
 if(process.env.NODE_ENV === 'production'){
   //set the static folder
   app.use(express.static(path.join(__dirname, '/client/build')));
-  app.get('*', (req, res) => {
+  app.get('/*', (req, res) => {
     res.sendFile(path.join(__dirname, 'client', 'build', 'index.html'));
+    console.log("Dir Name " , __dirname);
   });
 }else{
   app.get("/", (req, res) => {
@@ -59,6 +65,7 @@ router.get("/", (req, res) => {
   res.json({ message: "HELLOW WORLDUUHHHH" });
 });
 
+// app.use("/getData")
 router.get("/getData", (req, res) => {
   DiarySchema.find((err, data) => {
     if (err) return res.json({ success: false, error: err });
@@ -67,6 +74,7 @@ router.get("/getData", (req, res) => {
 });
 
 // Create DairySchema Route
+// app.use("/putData")
 router.post('/putData', async (req, res) => {
   const diarySchema = new DiarySchema({
     id: req.body.id,
@@ -90,6 +98,7 @@ router.post('/putData', async (req, res) => {
 })
 
 //Delete Entire Entry
+// app.use("deleteData")
 router.delete('/deleteData', (req, res) => {
       const id = req.body.id;
       
@@ -100,6 +109,7 @@ router.delete('/deleteData', (req, res) => {
   });
 
 //Update Entry
+// app.use('/updateData')
 router.post('/updateData', async (req, res) => {
   const id = req.body.id;
   
