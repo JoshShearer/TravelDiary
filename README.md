@@ -12,13 +12,13 @@ The server is in the /src directory.  The client will be served via the /client 
 
 In the server directory:
 
-*MONGODB_URI='Your MongoDB Atlas access link'.
-*NODE_ENV='production or development mode'.
+* MONGODB_URI='Your MongoDB Atlas access link'
+* NODE_ENV='production or development mode'
 
 In the client directory:
 
-*REACT_APP_GOOGLEMAPS_API='Your google maps API Key'.
-*NODE_ENV="production or development mode".
+* REACT_APP_GOOGLEMAPS_API='Your google maps API Key'
+* NODE_ENV="production or development mode"
 
 ## Available Scripts
 
