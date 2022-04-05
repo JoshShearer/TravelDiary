@@ -44,8 +44,6 @@ Your app is ready to be deployed!
 
 ### `npm run client`
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
 Runs the app in the development mode.\
 Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
@@ -67,3 +65,7 @@ The backend will connect to  [http://localhost:5000](http://localhost:5000) and 
 * Add Entry Tab => Allows you to input a title and your thoughts/experiences at the selected Location.  When you tap the Enter button you will be routed back to the Entries Page to view your journal entires.
 * Route Tab =>  Allows you to see all your entries on the maps.  Select the Marker to see more information about that location.
 * Entries Tab =>  A collection of all of your entries.  You can edit the entry title, your thoughts and the address of the location. 
+
+## Browser Note
+
+You may need to allow location services via the browser.  This app will request geolocation permission from the browser.  If permission is denied it will load the default location and you can navigate via the map to your current position. 
