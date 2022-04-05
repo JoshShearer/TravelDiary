@@ -8,17 +8,18 @@ https://react-travel-diary.herokuapp.com/
 
 ## Requirements
 
-The server is in the /src directory.  The client will be served via the /client directory.  Each has it's own project.json that will need to be installed.  each directory will need its own .env file to identify:
+The server is in the /src directory.  The client will be served via the /client directory.  Each has it's own project.json that will need to be installed.  Each directory will need its own .env file to identify:
 
-in the server directory...
+In the server directory...
 
 *MONGODB_URI='Your MongoDB Atlas access link'
-*NODE_ENV= 'production or development mode'
+*NODE_ENV='production or development mode'
 
-in the client directory...
+In the client directory...
 
 *REACT_APP_GOOGLEMAPS_API='Your google maps API Key'
-*NODE_ENV= "production or development mode"
+*NODE_ENV="production or development mode"
+
 ## Available Scripts
 
     "build": "npm run build --prefix client",
