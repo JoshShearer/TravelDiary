@@ -31,7 +31,7 @@ export default function DarkButton(props) {
                     <Button 
                         color= "primary"
                         variant="outlined"
-                        sx={{mx: '40%'}}  
+                        sx={{mx: '45%'}}  
                         onClick={props.click}                
                     >
                     {props.buttonText}

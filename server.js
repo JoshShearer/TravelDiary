@@ -36,7 +36,7 @@ db.once('open',() => {console.log('connected to the database'); })
 db.on('error', console.error.bind(console, 'MongoDB connection error'));
 
 app.use((req, res, next) => {
-  console.log(`${req.method} - ${req.url}`);
+  console.log("new Middleware ", `${req.method} - ${req.url}`);
   next()
 })
 
@@ -45,19 +45,6 @@ app.use((req, res, next) => {
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(logger("dev"));
-
-if(process.env.NODE_ENV === 'production'){
-  //set the static folder
-  app.use(express.static(path.join(__dirname, '/client/build')));
-  app.get('/*', (req, res) => {
-    res.sendFile(path.join(__dirname, 'client', 'build', 'index.html'));
-    console.log("Dir Name " , __dirname);
-  });
-}else{
-  app.get("/", (req, res) => {
-    res.send("api running");
-  })
-}
 
 
 // All entries Route
@@ -145,6 +132,19 @@ async function renderNewEntry(res, diarySchema, hasError = false) {
 
 
 app.use('/api', router);
+
+if(process.env.NODE_ENV === 'production'){
+  //set the static folder
+  app.use(express.static(path.join(__dirname, '/client/build')));
+  app.get('/*', (req, res) => {
+    res.sendFile(path.join(__dirname, 'client', 'build', 'index.html'));
+    console.log("Dir Name " , __dirname);
+  });
+}else{
+  app.get("/", (req, res) => {
+    res.send("api running");
+  })
+}
 
 //launch our backend into a port
 app.listen(API_PORT, (err) => {

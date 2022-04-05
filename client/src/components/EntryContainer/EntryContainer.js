@@ -6,6 +6,7 @@ import EditButton from "../CustomButtons/EditButton";
 import CButton from "../CButton";
 import IconButton from "@mui/material/IconButton";
 import styled from "@emotion/styled";
+import Typography from "@mui/material/Typography"
 import Dialog from "@mui/material/Dialog";
 import DialogTitle from "@mui/material/DialogTitle";
 import DialogActions from "@mui/material/DialogActions";
@@ -90,18 +91,18 @@ export default function DataContainer(props) {
     // localStorage.setItem('info', event.target.value)
   };
 
-  function removalModalHandler(entryID) {
+  function removalModalHandler(entryid) {
     setClassicModal(true);
-    // props.remove(entryID);
+    // props.remove(entryid);
   }
 
-  function editHandler(entryID) {
+  function editHandler(entryid) {
     setEditMode(true);
   }
 
-  function modifyEntry(entryID) {
+  function modifyEntry(entryid) {
     
-    const newEntry = { id: entryID.id,
+    const newEntry = { id: entryid.id,
                       title: title,
                       info: info,
                       address: address}
@@ -109,8 +110,8 @@ export default function DataContainer(props) {
     setEditMode(false);
   }
 
-  function deleteEntry(entryID) {
-    props.remove(entryID);
+  function deleteEntry(entryid) {
+    props.remove(entryid);
     setClassicModal(false);
   }
 
@@ -161,13 +162,11 @@ export default function DataContainer(props) {
               >
                 <ListItem
                   secondaryAction={
-                    <IconButton edge="end" aria-label="delete">
                       <DeleteButton
                         className={classes.avatar}
                         del={removalModalHandler}
                       />
-                    </IconButton>
-                  }
+                   }
                 >
                   <ListItemAvatar>
                     <Avatar>
@@ -252,12 +251,10 @@ export default function DataContainer(props) {
                 </ListItem>
                 <ListItem
                   secondaryAction={
-                    <IconButton edge="end" aria-label="delete">
                       <EditButton
                         className={classes.avatar}
                         edit={editHandler}
                       />
-                    </IconButton>
                   }
                 >
                   <ListItemAvatar>
@@ -358,12 +355,11 @@ export default function DataContainer(props) {
         aria-describedby="classic-modal-Slide-description"
       >
         <DialogTitle
-          entryID="classic-modal-Slide-title"
+          entryid="classic-modal-Slide-title"
+          fontWeight="bold"
           className={classes.modalHeader}
         >
-          <h4>
-            <strong>Are you sure you want to delete this entry?</strong>
-          </h4>
+          Are you sure you want to delete this entry?
           <DialogActions>
             <Button
               onClick={() => setClassicModal(false)}
@@ -389,7 +385,7 @@ export default function DataContainer(props) {
   );
 }
 
-//     entryID: Number,
+//     entryid: Number,
 //     title: String,
 //     info: String,
 //     image: [{type: Buffer}],

@@ -51,10 +51,10 @@ const Transition = forwardRef(function Transition(props, ref) {
             aria-labelledby="classic-modal-Slide-title"
             aria-describedby="classic-modal-Slide-description"
           >
-            <DialogTitle entryID="classic-modal-Slide-title" className={classes.modalHeader}>
-              <h4>
+            <DialogTitle entryid="classic-modal-Slide-title" className={classes.modalHeader}>
+              <h2>
                 <strong>No Entries Found!</strong>
-              </h4>
+              </h2>
               <DialogActions>
                 <Button
                   onClick={() => setClassicModal(false)}
