@@ -64,6 +64,6 @@ The backend will connect to  [http://localhost:5000](http://localhost:5000) and 
 ## Front End Menu
 
 * Home Tab =>  Allows you to see your current location or modify the location prior to your Journal Entry.
-* Add Entry Tab => Allows you to input a title and your thoughts/experiences at the selected Location.
+* Add Entry Tab => Allows you to input a title and your thoughts/experiences at the selected Location.  When you tap the Enter button you will be routed back to the Entries Page to view your journal entires.
 * Route Tab =>  Allows you to see all your entries on the maps.  Select the Marker to see more information about that location.
 * Entries Tab =>  A collection of all of your entries.  You can edit the entry title, your thoughts and the address of the location. 
