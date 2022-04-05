@@ -35,28 +35,29 @@ class MyGoogleMap extends Component {
   }
 
   componentDidMount() {
-      const response = this.setCurrentLocation()
+    // navigator.geolocation.getCurrentPosition((position) => {});
+    const response = this.setCurrentLocation()
       .then((coords) => {
-            if(coords !== null){
-                console.log("Geolocation Success");
-                this.setState(coords);
-            }else{
-                console.log("Geolocation Permission Denied");
-                this.setState({
-                    center: [37.80552, -122.3237437],
-                    lat: 37.80552,
-                    lng: -122.3237437,
-                  });
-                }
-            })
-      .catch((error=> {
-        console.log("Geoloction permission denied ", error.message)
-        this.setState({
+        if (coords !== null) {
+          console.log("Geolocation Success");
+          this.setState(coords);
+        } else {
+          console.log("Geolocation Permission Denied");
+          this.setState({
             center: [37.80552, -122.3237437],
             lat: 37.80552,
             lng: -122.3237437,
           });
-      }))
+        }
+      })
+      .catch((error) => {
+        console.log("Geoloction permission denied ", error.message);
+        this.setState({
+          center: [37.80552, -122.3237437],
+          lat: 37.80552,
+          lng: -122.3237437,
+        });
+      });
   }
 
   onMarkerInteraction = (childKey, childProps, mouse) => {
@@ -166,26 +167,43 @@ class MyGoogleMap extends Component {
   }
 
   // Get Current Location Coordinates
-  setCurrentLocation() { return new Promise((resolve, reject) => 
+  setCurrentLocation() {
+    return new Promise((resolve, reject) =>
+      navigator.permissions
+        ? navigator.permissions
+            .query({
+              name: "geolocation",
+            })
+            .then((permission) =>
+              // is geolocation granted?
+              permission.state === "granted"
+                ? navigator.geolocation.getCurrentPosition((position) => {
+                    resolve({
+                      center: [
+                        position.coords.latitude,
+                        position.coords.longitude,
+                      ],
+                      lat: position.coords.latitude,
+                      lng: position.coords.longitude,
+                    });
+                  }) :
+            
+                // navigator.geolocation.getCurrentPosition((position) => {
+                //     resolve({
+                //       center: [
+                //         position.coords.latitude,
+                //         position.coords.longitude,
+                //       ],
+                //       lat: position.coords.latitude,
+                //       lng: position.coords.longitude,
+                //     });
 
-        navigator.permissions ? 
-        navigator.permissions.query({
-            name: 'geolocation'
-          }).then(permission =>
-            // is geolocation granted?
-            permission.state === "granted"
-              ?  
-              navigator.geolocation.getCurrentPosition((position) => {
-                resolve({
-                  center: [position.coords.latitude, position.coords.longitude],
-                  lat: position.coords.latitude,
-                  lng: position.coords.longitude,
-                })
-              })              
-              : resolve(null)
-          ) :        
-          reject(new Error("Permission API is not supported"))
-  )}
+                    resolve(null)
+                  // })
+            )
+        : reject(new Error("Permission API is not supported"))
+    );
+  }
 
   render() {
     // const {

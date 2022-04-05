@@ -73,6 +73,7 @@ export default function DataContainer(props) {
   const [title, setTitle] = useState(props.data.title);
   const [info, setInfo] = useState(props.data.info);
   const [address, setAddress] = useState(props.data.location.address);
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth)
 
   const [entryData, setEntryData] = useEntries();
 
@@ -122,6 +123,7 @@ export default function DataContainer(props) {
   return (
     <div>
       <section>
+      {windowWidth > 640 ?
         <sidebar>
           <MapHome
             className="mapEntries"
@@ -131,6 +133,16 @@ export default function DataContainer(props) {
             static="true"
           />
         </sidebar>
+        :
+        <sidebarsm>
+          <MapHome
+            className="mapEntries"
+            mapSize={mapStyles}
+            location={props.data.gps}
+            zoom={8}
+            static="true"
+          />
+        </sidebarsm>}
         {!isEmpty(props.photos) && (
           <sidebar className="margin-left:10%">
             <ImageHandler photos={props.photos} />

@@ -17,6 +17,15 @@ header {
     padding: 20px;
     border-radius: 8px;
   }
+  sidebarsm{
+    vertical-align: middle;
+    float: left;
+    width: 100%;
+    height: 300px; /* only for demonstration, should be removed */
+    background: #ccc;
+    padding: 20px;
+    border-radius: 8px;
+  }
 
   MapHome {
       float: right;
