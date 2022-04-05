@@ -12,7 +12,7 @@ const configs = {
 };
 
 console.log("NODE_ENV DH ", process.env.REACT_APP_NODE_ENV)
-const config = configs[process.env.REACT_APP_NODE_ENV]
+const config = configs[process.env.NODE_ENV]
 console.log("Heroku_URI ", process.env.HEROKU_URI)
 console.log("config URL ", config.SERVER_URI);
 
