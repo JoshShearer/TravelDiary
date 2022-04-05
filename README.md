@@ -59,3 +59,11 @@ Runs the app in the development mode.\
 Will open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
 The backend will connect to  [http://localhost:5000](http://localhost:5000) and connect the backend to mongoDB and execute api calls for Getting and Posting Data.
+
+
+## Front End Menu
+
+* Home Tab =>  Allows you to see your current location or modify the location prior to your Journal Entry.
+* Add Entry Tab => Allows you to input a title and your thoughts/experiences at the selected Location.
+* Route Tab =>  Allows you to see all your entries on the maps.  Select the Marker to see more information about that location.
+* Entries Tab =>  A collection of all of your entries.  You can edit the entry title, your thoughts and the address of the location. 
