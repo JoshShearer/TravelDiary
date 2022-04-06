@@ -72,6 +72,10 @@ class MyGoogleMap extends Component {
     this._generateAddress();
   };
 
+  onMarkerInteractionDblClick = (childKey, childProps, mouse) => {
+    this._generateAddress();
+  }
+
   _onChange = ({ center, zoom }) => {
     this.setState({
       center: center,
@@ -96,14 +100,14 @@ class MyGoogleMap extends Component {
     this._generateAddress();
   };
 
-  addPlace = (place) => {
-    this.setState({
-      places: [place],
-      lat: place.geometry.location.lat(),
-      lng: place.geometry.location.lng(),
-    });
-    this._generateAddress();
-  };
+  // addPlace = (place) => {
+  //   this.setState({
+  //     places: [place],
+  //     lat: place.geometry.location.lat(),
+  //     lng: place.geometry.location.lng(),
+  //   });
+  //   this._generateAddress();
+  // };
 
   _generateAddress() {
     const { mapApi } = this.state;
@@ -222,6 +226,7 @@ class MyGoogleMap extends Component {
           zoom={this.state.zoom}
           draggable={this.state.draggable}
           onChange={this._onChange}
+          onChildDblClick={this.onMarkerInteractionDblClick}
           onChildMouseDown={this.onMarkerInteraction}
           onChildMouseUp={this.onMarkerInteractionMouseUp}
           onChildMouseMove={this.onMarkerInteraction}
